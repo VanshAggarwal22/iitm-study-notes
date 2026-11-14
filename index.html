@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IIT Madras BS Degree — Quiz 1 Crash Course</title>
+    <!-- Google Fonts & KaTeX -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '\(', right: '\)', display: false}]});"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --surface: #111827;
+            --surface-card: #1f2937;
+            --border: #374151;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --code-bg: #090d16;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --surface-card: #f1f5f9;
+            --border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent: #0284c7;
+            --accent-glow: rgba(2, 132, 199, 0.1);
+            --code-bg: #1e293b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px;
+        }
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            width: 0%;
+            z-index: 999;
+            transition: width 0.1s;
+        }
+        header.nav-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(11, 15, 25, 0.85);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        [data-theme="light"] header.nav-header {
+            background: rgba(248, 250, 252, 0.85);
+        }
+        .header-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn {
+            background: var(--surface-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        .btn:hover { border-color: var(--accent); }
+        .layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin: 24px 0 16px;
+            letter-spacing: -0.025em;
+            color: #fff;
+        }
+        [data-theme="light"] h1 { color: #0f172a; }
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 36px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            color: var(--accent);
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 24px 0 10px;
+            color: #e2e8f0;
+        }
+        [data-theme="light"] h3 { color: #1e293b; }
+        p { margin-bottom: 14px; color: var(--text-primary); }
+        .anchor-link {
+            opacity: 0.3;
+            text-decoration: none;
+            color: inherit;
+            margin-right: 4px;
+        }
+        .anchor-link:hover { opacity: 1; }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            -webkit-overflow-scrolling: touch;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+        th, td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--surface-card);
+            font-weight: 600;
+            color: var(--accent);
+        }
+        tr:last-child td { border-bottom: none; }
+        .code-wrap {
+            margin: 16px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--code-bg);
+        }
+        .code-header {
+            background: #161f30;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            color: #cbd5e1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.72rem;
+        }
+        pre {
+            margin: 0;
+            padding: 14px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        code:not(pre code) {
+            background: var(--surface-card);
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+            padding: 2px 6px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+        }
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+        li { margin-bottom: 6px; }
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid;
+            font-size: 0.92rem;
+        }
+        .alert-title {
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+        .alert-important {
+            background: rgba(248, 113, 113, 0.1);
+            border-color: var(--danger);
+            color: #fecaca;
+        }
+        [data-theme="light"] .alert-important { color: #991b1b; }
+        .alert-tip {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent);
+            color: #bae6fd;
+        }
+        [data-theme="light"] .alert-tip { color: #075985; }
+        .alert-caution {
+            background: rgba(251, 191, 36, 0.1);
+            border-color: var(--warning);
+            color: #fde68a;
+        }
+        [data-theme="light"] .alert-caution { color: #92400e; }
+        .math-display {
+            overflow-x: auto;
+            padding: 12px 0;
+            text-align: center;
+        }
+        /* Drawer for TOC */
+        #toc-drawer {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 60px;
+            background: var(--bg);
+            z-index: 200;
+            padding: 20px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border);
+        }
+        .toc-list { display: flex; flex-direction: column; gap: 8px; }
+        .toc-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 6px 0;
+            border-radius: 6px;
+            transition: color 0.15s;
+        }
+        .toc-item:hover { color: var(--accent); }
+        .pl-2 { padding-left: 8px; }
+        .pl-4 { padding-left: 20px; }
+        .text-sm { font-size: 0.85rem; }
+        .font-bold { font-weight: 600; color: var(--text-primary); }
+        .fab-toc {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: #0b0f19;
+            font-weight: 700;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+            cursor: pointer;
+            z-index: 150;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .search-box:focus { outline: 2px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+    <header class="nav-header">
+        <div class="header-title">
+            <span>📚</span>
+            <span>IITM Quiz 1 Master Notes</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn" onclick="toggleTheme()" id="theme-btn">🌓</button>
+            <button class="btn" onclick="toggleTOC()">📑 Topics</button>
+        </div>
+    </header>
+
+    <div id="toc-drawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+            <h3 style="margin:0;">Table of Contents</h3>
+            <button class="btn" onclick="toggleTOC()">✕ Close</button>
+        </div>
+        <input type="text" id="toc-search" placeholder="Search headings..." class="search-box" oninput="filterTOC()">
+        <div class="toc-list"><a href="#iit-madras-bs-degree-quiz-1-high-yield-crash-course" class="toc-item pl-2 font-bold">IIT Madras BS Degree — Quiz 1 High-Yield Crash Course</a><a href="#part-1-system-commands-se2001" class="toc-item pl-2 font-bold">PART 1: SYSTEM COMMANDS (SE2001)</a><a href="#1-linux-filesystem-inode-mechanics" class="toc-item pl-4 text-sm">1. Linux Filesystem &amp; Inode Mechanics</a><a href="#2-permissions-umask-arithmetic" class="toc-item pl-4 text-sm">2. Permissions &amp; `umask` Arithmetic</a><a href="#3-standard-streams-redirection" class="toc-item pl-4 text-sm">3. Standard Streams &amp; Redirection</a><a href="#4-text-processing-power-tools" class="toc-item pl-4 text-sm">4. Text Processing Power Tools</a><a href="#5-regular-expressions-bre-vs-ere" class="toc-item pl-4 text-sm">5. Regular Expressions: BRE vs. ERE</a><a href="#6-advanced-shell-commands-find-sed" class="toc-item pl-4 text-sm">6. Advanced Shell Commands: `find` &amp; `sed`</a><a href="#7-process-execution-subshells-environment" class="toc-item pl-4 text-sm">7. Process Execution, Subshells &amp; Environment</a><a href="#part-3-top-10-exam-traps-formulas-cheat-sheet" class="toc-item pl-2 font-bold">PART 3: TOP 10 EXAM TRAPS &amp; FORMULAS CHEAT SHEET</a></div>
+    </div>
+
+    <main class="layout">
+        <h1 id="iit-madras-bs-degree-quiz-1-high-yield-crash-course"<blockquote><a href="#iit-madras-bs-degree-quiz-1-high-yield-crash-course" class="anchor-link">#</a> IIT Madras BS Degree — Quiz 1 High-Yield Crash Course</h1></blockquote>
+<strong>Exam Date:</strong> Sunday, November 15, 2026 (2:00 PM – 6:00 PM IST)  
+<strong>Courses Covered:</strong>
+1. <strong>System Commands (SE2001)</strong> — Weeks 1 to 4 (plus Week 5 Shell Essentials)
+2. <strong>Database Management Systems (CS2001)</strong> — Weeks 1 to 4 (plus Week 5 Functional Dependencies & Normalization)
+
+<p>---</p>
+
+<h1 id="part-1-system-commands-se2001"<blockquote><a href="#part-1-system-commands-se2001" class="anchor-link">#</a> PART 1: SYSTEM COMMANDS (SE2001)</h1></blockquote>
+
+<!--CODE_BLOCK_0--<blockquote>---</blockquote>
+
+<h2 id="1-linux-filesystem-inode-mechanics"<blockquote><a href="#1-linux-filesystem-inode-mechanics" class="anchor-link">#</a> 1. Linux Filesystem & Inode Mechanics</h2></blockquote>
+
+<h3 id="the-inode-index-node"<blockquote><a href="#the-inode-index-node" class="anchor-link">#</a> The Inode (Index Node)</h3></blockquote>
+An inode stores metadata about a file. Crucially, <strong>the file name is NOT stored in the inode</strong> (it is stored in the directory entry that maps the name to an inode number).
+<ul>
+<li><strong>Stored in Inode:</strong> File type, permissions, owner UID, group GID, file size, timestamps (access <code>atime</code>, modification <code>mtime</code>, change <code>ctime</code>), link count, pointers to data blocks.</li>
+<li><strong>Commands:</strong></li>
+<li><code>ls -i <file<blockquote></code>: Displays the inode number.</blockquote></li>
+<li><code>stat <file<blockquote></code>: Full dump of inode attributes.</blockquote></li>
+<li><code>df -i</code>: Filesystem inode usage (can run out of inodes even if disk space remains).</li>
+</ul>
+<h3 id="hard-links-vs-symbolic-soft-links"<blockquote><a href="#hard-links-vs-symbolic-soft-links" class="anchor-link">#</a> Hard Links vs. Symbolic (Soft) Links</h3></blockquote>
+<div class="table-container"<blockquote><table><thead><tr><th>Feature</th><th>Hard Link (<code>ln target linkname</code>)</th><th>Symbolic Link (<code>ln -s target linkname</code>)</th></tr></thead><tbody><tr><td><strong>Inode</strong></td></tr></tbody></table></div> Shares the <strong>exact same inode</strong> as target | Has its <strong>own distinct inode</strong> |</blockquote>
+| <strong>Data Blocks</strong> | Points directly to target's data blocks | Stores target's <strong>path string</strong> in its block |
+| <strong>Link Count</strong> | Increments target inode's link count by 1 | Target link count is <strong>unaffected</strong> |
+| <strong>Deleting Target</strong> | File data persists! Link count decrements by 1 | Link becomes a <strong>broken / dangling link</strong> |
+| <strong>Directories</strong> | Cannot hard link directories (prevents loops) | Can link directories |
+| <strong>Cross-Filesystem</strong> | <strong>Cannot</strong> span across different filesystems | <strong>Can</strong> span across different filesystems/mounts |
+
+<div class="alert alert-important"<blockquote><div class="alert-title">IMPORTANT</div>> If a file has 3 hard links and you <code>rm</code> the original file, the data blocks remain intact until link count drops to 0 AND all open file descriptors close.</div></blockquote>
+
+<p>---</p>
+
+<h2 id="2-permissions-umask-arithmetic"<blockquote><a href="#2-permissions-umask-arithmetic" class="anchor-link">#</a> 2. Permissions & <code>umask</code> Arithmetic</h2></blockquote>
+
+<h3 id="octal-representation"<blockquote><a href="#octal-representation" class="anchor-link">#</a> Octal Representation</h3></blockquote>
+<ul>
+<li>Read (<code>r</code>) = 4, Write (<code>w</code>) = 2, Execute (<code>x</code>) = 1.</li>
+<li>Triplets: <code>[Owner][Group][Others]</code></li>
+<li><code>chmod 755 file.sh</code> <!--MATH_INLINE_0--<blockquote><code>rwxr-xr-x</code></blockquote></li>
+<li><code>chmod 644 file.txt</code> <!--MATH_INLINE_1--<blockquote><code>rw-r--r--</code></blockquote></li>
+</ul>
+<h3 id="symbolic-notation"<blockquote><a href="#symbolic-notation" class="anchor-link">#</a> Symbolic Notation</h3></blockquote>
+<ul>
+<li>Users: <code>u</code> (user/owner), <code>g</code> (group), <code>o</code> (others), <code>a</code> (all).</li>
+<li>Operators: <code>+</code> (add), <code>-</code> (remove), <code>=</code> (set exact).</li>
+<li><code>chmod u+x,g-w file</code></li>
+<li><code>chmod go=r file</code> (sets group and others to read-only).</li>
+</ul>
+<h3 id="the-umask-formula"<blockquote><a href="#the-umask-formula" class="anchor-link">#</a> The <code>umask</code> Formula</h3></blockquote>
+<code>umask</code> determines default permissions of newly created files and directories.
+<ul>
+<li><strong>Base permissions:</strong></li>
+<li>New Directory base: <code>0777</code> (<code>rwxrwxrwx</code>)</li>
+</ul>
+  <em> New Regular File base: <code>0666</code> (<code>rw-rw-rw-</code>) — </em>Execution bit is never granted by default for security.*
+<ul>
+<li><strong>Calculation Rule:</strong></li>
+</ul>
+  <!--MATH_BLOCK_0--<blockquote><em>(Bitwise NOT operation; simple subtraction holds whenever bits do not borrow).</em></blockquote>
+
+<h4 id="high-yield-examples"<blockquote><a href="#high-yield-examples" class="anchor-link">#</a> High-Yield Examples:</h4></blockquote>
+<ul>
+<li>If <code>umask = 022</code>:</li>
+<li>Directory: <!--MATH_INLINE_2--<blockquote>(<code>rwxr-xr-x</code>)</blockquote></li>
+<li>File: <!--MATH_INLINE_3--<blockquote>(<code>rw-r--r--</code>)</blockquote></li>
+<li>If <code>umask = 027</code>:</li>
+<li>Directory: <!--MATH_INLINE_4--<blockquote>(<code>rwxr-x---</code>)</blockquote></li>
+<li>File: <!--MATH_INLINE_5--<blockquote>(<code>rw-r-----</code>)</blockquote></li>
+<li>If <code>umask = 077</code>:</li>
+<li>Directory: <!--MATH_INLINE_6--<blockquote>(<code>rwx------</code>)</blockquote></li>
+<li>File: <!--MATH_INLINE_7--<blockquote>(<code>rw-------</code>)</blockquote></li>
+</ul>
+---
+
+<h2 id="3-standard-streams-redirection"<blockquote><a href="#3-standard-streams-redirection" class="anchor-link">#</a> 3. Standard Streams & Redirection</h2></blockquote>
+
+<ul>
+<li><code>0</code>: <code>stdin</code> (Standard Input)</li>
+<li><code>1</code>: <code>stdout</code> (Standard Output)</li>
+<li><code>2</code>: <code>stderr</code> (Standard Error)</li>
+</ul>
+<!--CODE_BLOCK_1--<blockquote><h3 id="redirection-operators"><a href="#redirection-operators" class="anchor-link">#</a> Redirection Operators</h3></blockquote>
+<ul>
+<li><code>cmd <blockquote>file</code>: Overwrite stdout to file.</blockquote></li>
+<li><code>cmd <blockquote>> file</code>: Append stdout to file.</blockquote></li>
+<li><code>cmd < file</code>: Read stdin from file.</li>
+<li><code>cmd 2<blockquote>file</code>: Overwrite stderr to file.</blockquote></li>
+<li><code>cmd 2<blockquote>> file</code>: Append stderr to file.</blockquote></li>
+<li><code>cmd <blockquote>file 2>&1</code>: Combine both stdout and stderr into <code>file</code> (classic POSIX).</blockquote></li>
+<li><code>cmd &<blockquote>file</code> or <code>cmd >& file</code>: Bash shorthand for combining stdout and stderr.</blockquote></li>
+<li><code>cmd 2<blockquote>/dev/null</code>: Discard errors silently.</blockquote></li>
+<li><code>cmd1 | cmd2</code>: Pipe stdout of <code>cmd1</code> to stdin of <code>cmd2</code> (stderr is NOT piped unless redirected with <code>|&</code> or <code>2<blockquote>&1 |</code>).</blockquote></li>
+<li><code>tee file</code>: Writes output to both stdout AND one or more files (<code>tee -a</code> for append).</li>
+</ul>
+---
+
+<h2 id="4-text-processing-power-tools"<blockquote><a href="#4-text-processing-power-tools" class="anchor-link">#</a> 4. Text Processing Power Tools</h2></blockquote>
+
+<h3 id="grep-global-regular-expression-print"<blockquote><a href="#grep-global-regular-expression-print" class="anchor-link">#</a> <code>grep</code> (Global Regular Expression Print)</h3></blockquote>
+<ul>
+<li><code>grep -i</code>: Case-insensitive search.</li>
+<li><code>grep -v</code>: Invert match (print non-matching lines).</li>
+<li><code>grep -c</code>: Count matching lines only.</li>
+<li><code>grep -n</code>: Prefix matching line with its 1-based line number.</li>
+<li><code>grep -l</code>: List file names with matches (stops scanning file upon first match).</li>
+<li><code>grep -w</code>: Match whole words only.</li>
+<li><code>grep -E</code> (or <code>egrep</code>): Use Extended Regular Expressions (ERE).</li>
+<li><code>grep -o</code>: Print ONLY the matching string parts, one per line.</li>
+</ul>
+<h3 id="sort-uniq"<blockquote><a href="#sort-uniq" class="anchor-link">#</a> <code>sort</code> & <code>uniq</code></h3></blockquote>
+<ul>
+<li><code>sort -n</code>: Numerical sort (sorts <code>10</code> after <code>2</code>, unlike lexicographical sort).</li>
+<li><code>sort -r</code>: Reverse order.</li>
+<li><code>sort -k <pos<blockquote></code>: Sort on specific key/column (e.g. <code>sort -k 2,2</code>).</blockquote></li>
+<li><code>sort -t <delim<blockquote></code>: Specify field separator (e.g. <code>sort -t: -k3,3n /etc/passwd</code>).</blockquote></li>
+<li><code>sort -u</code>: Sort and remove duplicates.</li>
+<li><code>uniq</code>: <strong>Requires sorted input!</strong></li>
+<li><code>uniq -c</code>: Prefix lines by the number of occurrences.</li>
+<li><code>uniq -d</code>: Output only repeated/duplicate lines.</li>
+<li><code>uniq -u</code>: Output only unique lines (lines that appeared exactly once).</li>
+</ul>
+<h3 id="cut-paste-tr"<blockquote><a href="#cut-paste-tr" class="anchor-link">#</a> <code>cut</code>, <code>paste</code>, <code>tr</code></h3></blockquote>
+<ul>
+<li><code>cut -d',' -f2,4 data.csv</code>: Extract fields 2 and 4 separated by comma.</li>
+<li><code>cut -c1-10 file.txt</code>: Extract characters 1 to 10.</li>
+<li><code>paste -d',' f1 f2</code>: Merges lines of files side-by-side separated by delimiter.</li>
+<li><code>tr 'a-z' 'A-Z' < file</code>: Translates lowercase to uppercase (reads stdin only!).</li>
+<li><code>tr -d '0-9'</code>: Delete all specified characters.</li>
+<li><code>tr -s ' '</code>: Squeeze consecutive spaces into a single space.</li>
+</ul>
+<h3 id="head-tail-wc"<blockquote><a href="#head-tail-wc" class="anchor-link">#</a> <code>head</code>, <code>tail</code>, <code>wc</code></h3></blockquote>
+<ul>
+<li><code>head -n 5 file</code>: First 5 lines.</li>
+<li><code>head -n -5 file</code>: All lines except the last 5 lines.</li>
+<li><code>tail -n 5 file</code>: Last 5 lines.</li>
+<li><code>tail -n +5 file</code>: From line 5 to end of file.</li>
+<li><code>tail -f file</code>: Follow growing file in real time.</li>
+<li><code>wc -l</code>: Count lines (<code>\n</code>).</li>
+<li><code>wc -w</code>: Count words.</li>
+<li><code>wc -c</code>: Count bytes (<code>-m</code> for characters).</li>
+</ul>
+---
+
+<h2 id="5-regular-expressions-bre-vs-ere"<blockquote><a href="#5-regular-expressions-bre-vs-ere" class="anchor-link">#</a> 5. Regular Expressions: BRE vs. ERE</h2></blockquote>
+
+<div class="table-container"<blockquote><table><thead><tr><th>Feature</th><th>Basic Regex (BRE - default <code>grep</code>, <code>sed</code>)</th><th>Extended Regex (ERE - <code>grep -E</code>, <code>egrep</code>, <code>awk</code>)</th></tr></thead><tbody><tr><td><strong>Alternation</strong></td></tr></tbody></table></div> <code>\|</code> (must escape) | <code>|</code> (bare) |</blockquote>
+| <strong>Grouping</strong> | <code>\(</code> and <code>\)</code> | <code>(</code> and <code>)</code> |
+| <strong>One or more (<code>+</code>)</strong> | <code>\+</code> | <code>+</code> |
+| <strong>Zero or one (<code>?</code>)</strong> | <code>\?</code> | <code>?</code> |
+| <strong>Intervals</strong> | <code>\{m,n\}</code> | <code>{m,n}</code> |
+| <strong>Any character</strong> | <code>.</code> | <code>.</code> |
+| <strong>Anchors</strong> | <code>^</code> (start of line), <code><!--MATH_INLINE_8--<blockquote></code> |</blockquote>
+| <strong>Char Classes</strong> | <code>[a-z]</code>, <code>[^0-9]</code> (negated) | <code>[a-z]</code>, <code>[^0-9]</code> |
+
+<div class="alert alert-tip"<blockquote><div class="alert-title">TIP</div>> <strong>Matching an IP address:</strong>
+> <code>^([0-9]{1,3}\.){3}[0-9]{1,3}$</code> with <code>grep -E</code>.
+> <strong>Checking empty lines:</strong> <code>grep '^$' file</code></div></blockquote>
+
+<p>---</p>
+
+<h2 id="6-advanced-shell-commands-find-sed"<blockquote><a href="#6-advanced-shell-commands-find-sed" class="anchor-link">#</a> 6. Advanced Shell Commands: <code>find</code> & <code>sed</code></h2></blockquote>
+
+<h3 id="find-command"<blockquote><a href="#find-command" class="anchor-link">#</a> <code>find</code> Command</h3></blockquote>
+Syntax: <code>find [path] [predicates] [actions]</code>
+<ul>
+<li>Predicates:</li>
+</ul>
+  <em> <code>-name "</em>.log"</code> (case sensitive), <code>-iname "*.log"</code> (case insensitive).
+<ul>
+<li><code>-type f</code> (regular file), <code>-type d</code> (directory), <code>-type l</code> (symlink).</li>
+<li><code>-size +10M</code> (greater than 10MB), <code>-size -1k</code> (less than 1KB).</li>
+<li><code>-mtime -7</code> (modified within last 7 days), <code>-mtime +30</code> (modified over 30 days ago).</li>
+<li><code>-perm 755</code> (exact permissions).</li>
+<li>Actions:</li>
+<li><code>-exec cmd {} +</code>: Runs <code>cmd</code> passing all matching files as batch arguments (efficient!).</li>
+<li><code>-exec cmd {} \;</code>: Runs <code>cmd</code> once per found file.</li>
+<li><code>-delete</code>: Delete matching files directly.</li>
+</ul>
+<h3 id="sed-stream-editor"<blockquote><a href="#sed-stream-editor" class="anchor-link">#</a> <code>sed</code> (Stream Editor)</h3></blockquote>
+Syntax: <code>sed [options] 'address command' file</code>
+<ul>
+<li>Substitution: <code>sed 's/pattern/replacement/g' file</code></li>
+<li><code>g</code>: Global (all occurrences per line).</li>
+<li><code>2</code>: Replace only 2nd occurrence per line.</li>
+<li><code>p</code>: Print matched line (used with <code>sed -n 's/.../.../p'</code>).</li>
+<li>Deletion:</li>
+<li><code>sed '5d' file</code>: Delete line 5.</li>
+<li><code>sed '1,3d' file</code>: Delete lines 1 to 3.</li>
+<li><code>sed '/^#/d' file</code>: Delete comment lines starting with <code>#</code>.</li>
+<li><code>sed '/pattern/!d' file</code>: Delete lines NOT matching pattern (equivalent to <code>grep</code>).</li>
+<li>In-place modification: <code>sed -i.bak 's/foo/bar/g' file.txt</code></li>
+</ul>
+---
+
+<h2 id="7-process-execution-subshells-environment"<blockquote><a href="#7-process-execution-subshells-environment" class="anchor-link">#</a> 7. Process Execution, Subshells & Environment</h2></blockquote>
+
+<ul>
+<li><code>cmd &</code>: Run process in background (prints job number and PID <code>$!</code>).</li>
+<li><code><!--MATH_BLOCK_1--<blockquote>\{t \mid t \in \text{Employee} \land (\exists d \in \text{Department})(d.\text{dname} = 'IT' \land t.\text{dept\_id} = d.\text{dept\_id})\}<div class="math-display">\(
+* **Universal Quantifier ($\forall$):** &quot;For all tuples&quot;
+* **Equivalence identity:**
+  \)</div>\forall x \, P(x) \equiv \neg \exists x \, (\neg P(x))<div class="math-display">\(
+
+---
+
+## 5. SQL Execution Order &amp; Advanced Syntax
+
+### SQL Logical Query Processing Order
+Writing SQL differs from how the database engine executes it:
+\)</div>\text{FROM} \longrightarrow \text{WHERE} \longrightarrow \text{GROUP BY} \longrightarrow \text{HAVING} \longrightarrow \text{SELECT} \longrightarrow \text{DISTINCT} \longrightarrow \text{ORDER BY}<div class="math-display">\(
+
+&gt; [!CAUTION]
+&gt; Column aliases defined in `SELECT` cannot be referenced in `WHERE` or `GROUP BY` because `SELECT` is evaluated after them!
+
+### `WHERE` vs. `HAVING`
+* `WHERE`: Filters individual records **before aggregation**. Cannot use aggregate functions (`WHERE salary &gt; 50000`).
+* `HAVING`: Filters aggregated groups **after aggregation**. Uses aggregate functions (`HAVING COUNT(*) &gt; 5`).
+
+### Subquery Operators:
+* `IN / NOT IN`: Membership test against a list or subquery.
+  *(Watch out for NULLs in `NOT IN`: if subquery returns any NULL, `NOT IN` evaluates to UNKNOWN/false for all rows!)*
+* `EXISTS / NOT EXISTS`: Returns TRUE if the correlated subquery returns at least 1 row. Highly efficient because DB stops scanning on first hit.
+* `ANY / SOME`:
+  * `x &gt; ANY (SELECT ...)`: Greater than the **minimum** of the subquery values.
+* `ALL`:
+  * `x &gt; ALL (SELECT ...)`: Greater than the **maximum** of the subquery values.
+
+---
+
+## 6. Entity-Relationship (ER) Modeling
+
+&lt;!--CODE_BLOCK_4--&gt;
+
+### Components
+* **Entity:** An independently identifiable object in real world.
+* **Weak Entity Set:** An entity set that does not have sufficient attributes to form a primary key.
+  * Represented by **double rectangle**.
+  * Depends on an **identifying entity set** via an **identifying relationship** (represented by **double diamond**).
+  * Has a **discriminator / partial key** (underlined with dashed/dotted line).
+  * Must have **total participation** in the identifying relationship.
+  * Primary key of weak entity = **Primary key of identifying entity + Discriminator**.
+* **Attributes:**
+  * Simple vs. Composite (`Address` broken into `City, State, Zip`).
+  * Single-valued vs. Multi-valued (double oval, e.g. `{PhoneNumbers}`).
+  * Derived (dashed oval, e.g. `Age` derived from `DOB`).
+
+### Cardinality Ratios &amp; Table Reduction Rules
+1. **Many-to-Many ($M:N$):**
+   * Cannot merge tables.
+   * Requires **3 tables**: Entity $E_1$, Entity $E_2$, and Relationship table $R$.
+   * Primary key of relationship table $R$ is the composite key $(PK_{E_1}, PK_{E_2})$.
+2. **One-to-Many ($1:N$):**
+   * Can be represented with **2 tables** by embedding the primary key of the &quot;1&quot; side as a foreign key on the &quot;N&quot; (Many) side table.
+3. **One-to-One ($1:1$):**
+   * If one side has **total participation**, place foreign key in that side&#x27;s table to avoid NULLs.
+   * If both sides have total participation, relations can be **merged into a single table**.
+4. **Multi-valued Attributes:**
+   * Each multi-valued attribute requires its **own separate table** with $(PK_{\text{Entity}}, \text{AttributeValue})$ as primary key.
+
+---
+
+## 7. Functional Dependencies &amp; Normalization (Bonus Week 5)
+
+* **Functional Dependency ($X \to Y$):** If two tuples agree on attribute set $X$, they must agree on attribute set $Y$.
+* **Attribute Closure ($X^+$):** Set of all attributes functionally determined by $X$ under given $F$.
+  * If $X^+ = R$, then $X$ is a **Super Key**.
+  * If $X$ is a super key and no proper subset of $X$ is a super key, $X$ is a **Candidate Key**.
+* **Super Key Count Formula:**
+  If relation $R$ has $n$ attributes and a candidate key has $k$ attributes:
+  \)</div>\text{Number of Super Keys} = 2^{n - k}<div class="math-display">\(
+* **Lossless Join Decomposition Condition:**
+  Decomposition of $R$ into $R_1$ and $R_2$ is lossless if and only if:
+  \)</div>(R_1 \cap R_2) \to R_1 \quad \text{OR} \quad (R_1 \cap R_2) \to R_2<span class="math-inline">\(\)</span></blockquote></li>
+</ul>
+  <em>(i.e. The intersection attributes must form a super key for at least one of the decomposed tables).</em>
+
+<p>---</p>
+
+<h1 id="part-3-top-10-exam-traps-formulas-cheat-sheet"<blockquote><a href="#part-3-top-10-exam-traps-formulas-cheat-sheet" class="anchor-link">#</a> PART 3: TOP 10 EXAM TRAPS & FORMULAS CHEAT SHEET</h1></blockquote>
+
+<p>1. <strong></code>grep<code> vs </code>find -exec<code>:</strong><br>   <em> </code>find . -name "</em>.txt" -exec grep -l "pattern" {} +<code>: Efficient, spawns single grep.<br>   <em> </code>find . -name "</em>.txt" | xargs grep "pattern"<code>: Standard alternative.<br>2. <strong></code>umask<code> on files vs directories:</strong><br><ul><br><li>File default maximum is </code>666<code>, NEVER </code>777<code>. Subtraction cannot result in execution bits on files unless explicitly set by </code>chmod<code>.</li><br></ul><br>3. <strong>Hard link deletion:</strong><br><ul><br><li>Deleting file does NOT delete data if hard links exist. Deleting file DOES break symbolic links.</li><br></ul><br>4. <strong>Relational Algebra duplicate elimination:</strong><br><ul><br><li><!--MATH_INLINE_10--<blockquote>(projection) eliminates duplicates by mathematical definition! In SQL, </code>SELECT<code> preserves duplicates unless </code>DISTINCT<code> is specified.</blockquote></li><br></ul><br>5. <strong>Foreign key NULLs:</strong><br><ul><br><li>A foreign key CAN be NULL unless explicitly declared with </code>NOT NULL<code> constraint.</li><br></ul><br>6. <strong>Cartesian Product Degrees and Cardinalities:</strong><br><ul><br><li>Degree adds: <!--MATH_INLINE_11--<blockquote>.</blockquote></li><br><li>Cardinality multiplies: <!--MATH_INLINE_12--<blockquote>.</blockquote></li><br></ul><br>7. <strong></code>COUNT(*)<code> vs </code>COUNT(column)<code>:</strong><br>   <em> </code>COUNT(</em>)<code> counts all rows including NULLs.<br><ul><br><li></code>COUNT(col)<code> counts only rows where </code>col<code> IS NOT NULL.</li><br></ul><br>8. <strong>Weak entity primary key:</strong><br><ul><br><li>Identifying owner's PK + Weak entity discriminator.</li><br></ul><br>9. <strong></code>sort<code> before </code>uniq<code>:</strong><br><ul><br><li>Always pipe </code>sort<code> before </code>uniq<code> (</code>sort | uniq -c<code>).</li><br></ul><br>10. <strong>Redirection order:</strong><br><ul><br><li></code>cmd <blockquote>file 2>&1<code> directs stdout to </code>file<code>, then stderr to same destination as stdout.</blockquote></li><br><li></code>cmd 2<blockquote>&1 > file<code> directs stderr to terminal (current stdout), then stdout to </code>file` (NOT the same!).</blockquote></li><br></ul></p>
+    </main>
+
+    <button class="fab-toc" onclick="toggleTOC()">
+        📑 Jump to Topic
+    </button>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Theme toggle
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const target = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', target);
+            localStorage.setItem('notes-theme', target);
+        }
+        const savedTheme = localStorage.getItem('notes-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // TOC Toggle
+        function toggleTOC() {
+            const d = document.getElementById('toc-drawer');
+            d.style.display = (d.style.display === 'block') ? 'none' : 'block';
+        }
+        function filterTOC() {
+            const q = document.getElementById('toc-search').value.toLowerCase();
+            document.querySelectorAll('.toc-item').forEach(el => {
+                el.style.display = el.innerText.toLowerCase().includes(q) ? 'block' : 'none';
+            });
+        }
+        document.querySelectorAll('.toc-item').forEach(el => {
+            el.addEventListener('click', () => {
+                document.getElementById('toc-drawer').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
