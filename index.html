@@ -2,20 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>IIT Madras BS Degree — Quiz 1 Crash Course (SE2001 & CS2001)</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>IIT Madras BS Degree — Quiz 1 Crash Course</title>
     
     <!-- KaTeX -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-
-    <!-- Marked.js -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}]});"></script>
 
     <!-- Prism Code Highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -29,29 +25,27 @@
             --surface: #111827;
             --surface-card: #1e293b;
             --border: #334155;
-            --text-primary: #f1f5f9;
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.15);
             --code-bg: #090d16;
             --danger: #f87171;
             --warning: #fbbf24;
             --success: #34d399;
         }
         [data-theme="light"] {
-            --bg: #f8fafc;
-            --surface: #ffffff;
+            --bg: #ffffff;
+            --surface: #f8fafc;
             --surface-card: #f1f5f9;
             --border: #cbd5e1;
             --text-primary: #0f172a;
-            --text-secondary: #64748b;
+            --text-secondary: #475569;
             --accent: #0284c7;
-            --accent-glow: rgba(2, 132, 199, 0.1);
             --code-bg: #1e293b;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.7;
@@ -62,18 +56,17 @@
             position: fixed;
             top: 0;
             left: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
             width: 0%;
             z-index: 1000;
-            transition: width 0.1s;
         }
         header.nav-header {
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(16px);
-            background: rgba(11, 15, 25, 0.9);
+            background: rgba(11, 15, 25, 0.92);
             border-bottom: 1px solid var(--border);
             padding: 12px 18px;
             display: flex;
@@ -81,10 +74,10 @@
             justify-content: space-between;
         }
         [data-theme="light"] header.nav-header {
-            background: rgba(248, 250, 252, 0.9);
+            background: rgba(255, 255, 255, 0.92);
         }
         .header-title {
-            font-size: 0.98rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--accent);
             display: flex;
@@ -101,16 +94,12 @@
             color: var(--text-primary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
+            padding: 7px 14px;
+            font-size: 0.88rem;
             font-weight: 600;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
             transition: all 0.2s;
         }
-        .btn:hover { border-color: var(--accent); }
         .layout {
             max-width: 900px;
             margin: 0 auto;
@@ -119,10 +108,9 @@
         h1 {
             font-size: 1.85rem;
             font-weight: 800;
-            line-height: 1.25;
-            margin: 28px 0 16px;
-            letter-spacing: -0.025em;
-            color: #fff;
+            line-height: 1.3;
+            margin: 32px 0 16px;
+            color: #ffffff;
             border-bottom: 2px solid var(--accent);
             padding-bottom: 8px;
         }
@@ -139,45 +127,83 @@
             font-size: 1.15rem;
             font-weight: 600;
             margin: 26px 0 10px;
-            color: #e2e8f0;
+            color: #f1f5f9;
         }
         [data-theme="light"] h3 { color: #1e293b; }
-        p { margin-bottom: 14px; }
+        p { margin-bottom: 14px; font-size: 1rem; }
+        hr { border: 0; height: 1px; background: var(--border); margin: 28px 0; }
+        .anchor-link {
+            opacity: 0.35;
+            text-decoration: none;
+            color: inherit;
+            margin-right: 6px;
+        }
+        .anchor-link:hover { opacity: 1; }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
-            margin: 18px 0;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border);
+            font-size: 0.92rem;
+            text-align: left;
         }
         th, td {
             padding: 10px 14px;
             border-bottom: 1px solid var(--border);
-            text-align: left;
         }
         th {
             background: var(--surface-card);
             color: var(--accent);
             font-weight: 600;
         }
-        pre {
-            margin: 16px 0;
-            padding: 14px;
+        tr:last-child td { border-bottom: none; }
+        .code-wrap {
+            margin: 18px 0;
             border-radius: 10px;
-            background: var(--code-bg) !important;
+            overflow: hidden;
             border: 1px solid var(--border);
+            background: var(--code-bg);
+        }
+        .code-header {
+            background: #161f30;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            font-family: monospace;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: #f8fafc;
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        pre {
+            margin: 0;
+            padding: 14px;
             overflow-x: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.5;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            background: transparent !important;
         }
         code:not(pre code) {
             background: var(--surface-card);
             color: var(--accent);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.88em;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
             padding: 2px 6px;
             border-radius: 5px;
             border: 1px solid var(--border);
@@ -191,7 +217,21 @@
             background: rgba(56, 189, 248, 0.08);
             border-radius: 0 8px 8px 0;
         }
-        /* Drawer for TOC */
+        .alert {
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin: 18px 0;
+            border-left: 4px solid;
+            font-size: 0.95rem;
+        }
+        .alert-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 4px; }
+        .alert-important { background: rgba(248, 113, 113, 0.12); border-color: var(--danger); color: #fecaca; }
+        [data-theme="light"] .alert-important { color: #991b1b; }
+        .alert-tip { background: rgba(56, 189, 248, 0.12); border-color: var(--accent); color: #bae6fd; }
+        [data-theme="light"] .alert-tip { color: #075985; }
+        .alert-caution { background: rgba(251, 191, 36, 0.12); border-color: var(--warning); color: #fde68a; }
+        [data-theme="light"] .alert-caution { color: #92400e; }
+        
         #toc-drawer {
             display: none;
             position: fixed;
@@ -211,12 +251,12 @@
             text-decoration: none;
             padding: 6px 0;
             border-radius: 6px;
-            transition: color 0.15s;
         }
         .toc-item:hover { color: var(--accent); }
-        .toc-h1 { font-weight: 700; color: var(--text-primary); margin-top: 10px; font-size: 0.98rem; }
-        .toc-h2 { padding-left: 14px; font-size: 0.9rem; }
-        .toc-h3 { padding-left: 28px; font-size: 0.84rem; }
+        .toc-h1 { font-weight: 700; color: var(--text-primary); margin-top: 10px; font-size: 1rem; }
+        .toc-h2 { padding-left: 14px; font-size: 0.92rem; }
+        .toc-h3 { padding-left: 28px; font-size: 0.85rem; }
+        
         .fab-toc {
             position: fixed;
             bottom: 24px;
@@ -224,16 +264,13 @@
             background: var(--accent);
             color: #0b0f19;
             font-weight: 700;
-            padding: 12px 20px;
+            padding: 12px 22px;
             border-radius: 30px;
             border: none;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.45);
             cursor: pointer;
             z-index: 150;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
         .search-box {
             width: 100%;
@@ -245,8 +282,6 @@
             font-size: 0.92rem;
             margin-bottom: 20px;
         }
-        .search-box:focus { outline: 2px solid var(--accent); }
-        .math-display { overflow-x: auto; padding: 10px 0; }
     </style>
 </head>
 <body>
@@ -254,10 +289,10 @@
     <header class="nav-header">
         <div class="header-title">
             <span>📚</span>
-            <span>IITM Quiz 1 Notes</span>
+            <span>IITM Quiz 1 Master Notes</span>
         </div>
         <div class="header-actions">
-            <button class="btn" onclick="toggleTheme()" id="theme-btn">🌓</button>
+            <button class="btn" onclick="toggleTheme()" id="theme-btn">🌓 Theme</button>
             <button class="btn" onclick="toggleTOC()">📑 Topics</button>
         </div>
     </header>
@@ -271,19 +306,439 @@
         <div class="toc-list"><a href="#iit-madras-bs-degree-quiz-1-high-yield-crash-course" class="toc-item toc-h1">IIT Madras BS Degree — Quiz 1 High-Yield Crash Course</a><a href="#part-1-system-commands-se2001" class="toc-item toc-h1">PART 1: SYSTEM COMMANDS (SE2001)</a><a href="#1-linux-filesystem-inode-mechanics" class="toc-item toc-h2">1. Linux Filesystem & Inode Mechanics</a><a href="#the-inode-index-node" class="toc-item toc-h3">The Inode (Index Node)</a><a href="#hard-links-vs-symbolic-soft-links" class="toc-item toc-h3">Hard Links vs. Symbolic (Soft) Links</a><a href="#2-permissions-umask-arithmetic" class="toc-item toc-h2">2. Permissions & `umask` Arithmetic</a><a href="#octal-representation" class="toc-item toc-h3">Octal Representation</a><a href="#symbolic-notation" class="toc-item toc-h3">Symbolic Notation</a><a href="#the-umask-formula" class="toc-item toc-h3">The `umask` Formula</a><a href="#3-standard-streams-redirection" class="toc-item toc-h2">3. Standard Streams & Redirection</a><a href="#redirection-operators" class="toc-item toc-h3">Redirection Operators</a><a href="#4-text-processing-power-tools" class="toc-item toc-h2">4. Text Processing Power Tools</a><a href="#grep-global-regular-expression-print" class="toc-item toc-h3">`grep` (Global Regular Expression Print)</a><a href="#sort-uniq" class="toc-item toc-h3">`sort` & `uniq`</a><a href="#cut-paste-tr" class="toc-item toc-h3">`cut`, `paste`, `tr`</a><a href="#head-tail-wc" class="toc-item toc-h3">`head`, `tail`, `wc`</a><a href="#5-regular-expressions-bre-vs-ere" class="toc-item toc-h2">5. Regular Expressions: BRE vs. ERE</a><a href="#6-advanced-shell-commands-find-sed" class="toc-item toc-h2">6. Advanced Shell Commands: `find` & `sed`</a><a href="#find-command" class="toc-item toc-h3">`find` Command</a><a href="#sed-stream-editor" class="toc-item toc-h3">`sed` (Stream Editor)</a><a href="#7-process-execution-subshells-environment" class="toc-item toc-h2">7. Process Execution, Subshells & Environment</a><a href="#vi-vim-quick-reference" class="toc-item toc-h3">Vi / Vim Quick Reference</a><a href="#part-2-database-management-systems-cs2001" class="toc-item toc-h1">PART 2: DATABASE MANAGEMENT SYSTEMS (CS2001)</a><a href="#1-dbms-fundamentals-data-independence" class="toc-item toc-h2">1. DBMS Fundamentals & Data Independence</a><a href="#2-integrity-constraints-foreign-keys" class="toc-item toc-h2">2. Integrity Constraints & Foreign Keys</a><a href="#3-relational-algebra-toolkit" class="toc-item toc-h2">3. Relational Algebra Toolkit</a><a href="#core-operations" class="toc-item toc-h3">Core Operations</a><a href="#4-tuple-relational-calculus-trc" class="toc-item toc-h2">4. Tuple Relational Calculus (TRC)</a><a href="#5-sql-execution-order-advanced-syntax" class="toc-item toc-h2">5. SQL Execution Order & Advanced Syntax</a><a href="#sql-logical-query-processing-order" class="toc-item toc-h3">SQL Logical Query Processing Order</a><a href="#where-vs-having" class="toc-item toc-h3">`WHERE` vs. `HAVING`</a><a href="#subquery-operators" class="toc-item toc-h3">Subquery Operators:</a><a href="#6-entity-relationship-er-modeling" class="toc-item toc-h2">6. Entity-Relationship (ER) Modeling</a><a href="#components" class="toc-item toc-h3">Components</a><a href="#cardinality-ratios-table-reduction-rules" class="toc-item toc-h3">Cardinality Ratios & Table Reduction Rules</a><a href="#7-functional-dependencies-normalization-bonus-week-5" class="toc-item toc-h2">7. Functional Dependencies & Normalization (Bonus Week 5)</a><a href="#part-3-top-10-exam-traps-formulas-cheat-sheet" class="toc-item toc-h1">PART 3: TOP 10 EXAM TRAPS & FORMULAS CHEAT SHEET</a></div>
     </div>
 
-    <main class="layout" id="markdown-container">
-        <!-- Rendered markdown injected here -->
-        <div style="text-align:center; padding: 40px; color: var(--text-secondary);">Loading notes...</div>
+    <main class="layout">
+        <!-- PURE STATIC PRE-RENDERED CONTENT -->
+        <h1 id="iit-madras-bs-degree-quiz-1-high-yield-crash-course"><a href="#iit-madras-bs-degree-quiz-1-high-yield-crash-course" class="anchor-link">#</a> IIT Madras BS Degree — Quiz 1 High-Yield Crash Course</h1>
+<p><strong>Exam Date:</strong> Sunday, November 15, 2026 (2:00 PM – 6:00 PM IST)</p>
+<p><strong>Courses Covered:</strong></p>
+<p>1. <strong>System Commands (SE2001)</strong> — Weeks 1 to 4 (plus Week 5 Shell Essentials)</p>
+<p>2. <strong>Database Management Systems (CS2001)</strong> — Weeks 1 to 4 (plus Week 5 Functional Dependencies & Normalization)</p>
+<hr>
+<h1 id="part-1-system-commands-se2001"><a href="#part-1-system-commands-se2001" class="anchor-link">#</a> PART 1: SYSTEM COMMANDS (SE2001)</h1>
+<div class="code-wrap">
+                    <div class="code-header"><span>text</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-wrap').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',1500)">Copy</button></div>
+                    <pre><code class="language-">                            Linux System Architecture
+┌────────────────────────────────────────────────────────────────────────┐
+│  User Space: Shell (bash/sh), Core Utilities (grep, find, sed, awk)   │
+├────────────────────────────────────────────────────────────────────────┤
+│  Kernel Space: Process Mgmt, Virtual File System (VFS), Inodes, IPC   │
+├────────────────────────────────────────────────────────────────────────┤
+│  Hardware: Storage Blocks, CPU, RAM, Network Interfaces               │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+                </div>
+<hr>
+<h2 id="1-linux-filesystem-inode-mechanics"><a href="#1-linux-filesystem-inode-mechanics" class="anchor-link">#</a> 1. Linux Filesystem & Inode Mechanics</h2>
+<h3 id="the-inode-index-node"><a href="#the-inode-index-node" class="anchor-link">#</a> The Inode (Index Node)</h3>
+<p>An inode stores metadata about a file. Crucially, <strong>the file name is NOT stored in the inode</strong> (it is stored in the directory entry that maps the name to an inode number).</p>
+<ul>
+<li><strong>Stored in Inode:</strong> File type, permissions, owner UID, group GID, file size, timestamps (access <code>atime</code>, modification <code>mtime</code>, change <code>ctime</code>), link count, pointers to data blocks.</li>
+<li><strong>Commands:</strong></li>
+<li><code>ls -i <file></code>: Displays the inode number.</li>
+<li><code>stat <file></code>: Full dump of inode attributes.</li>
+<li><code>df -i</code>: Filesystem inode usage (can run out of inodes even if disk space remains).</li>
+</ul>
+<h3 id="hard-links-vs-symbolic-soft-links"><a href="#hard-links-vs-symbolic-soft-links" class="anchor-link">#</a> Hard Links vs. Symbolic (Soft) Links</h3>
+<div class="table-container"><table><thead><tr><th>Feature</th><th>Hard Link (`ln target linkname`)</th><th>Symbolic Link (`ln -s target linkname`)</th></tr></thead><tbody><tr><td>**Inode**</td><td>Shares the **exact same inode** as target</td><td>Has its **own distinct inode**</td></tr><tr><td>**Data Blocks**</td><td>Points directly to target's data blocks</td><td>Stores target's **path string** in its block</td></tr><tr><td>**Link Count**</td><td>Increments target inode's link count by 1</td><td>Target link count is **unaffected**</td></tr><tr><td>**Deleting Target**</td><td>File data persists! Link count decrements by 1</td><td>Link becomes a **broken / dangling link**</td></tr><tr><td>**Directories**</td><td>Cannot hard link directories (prevents loops)</td><td>Can link directories</td></tr><tr><td>**Cross-Filesystem**</td><td>**Cannot** span across different filesystems</td><td>**Can** span across different filesystems/mounts</td></tr></tbody></table></div>
+<div class="alert alert-important"><div class="alert-title">IMPORTANT</div>
+<blockquote>If a file has 3 hard links and you <code>rm</code> the original file, the data blocks remain intact until link count drops to 0 AND all open file descriptors close.</blockquote>
+<hr>
+<h2 id="2-permissions-umask-arithmetic"><a href="#2-permissions-umask-arithmetic" class="anchor-link">#</a> 2. Permissions & `umask` Arithmetic</h2>
+<h3 id="octal-representation"><a href="#octal-representation" class="anchor-link">#</a> Octal Representation</h3>
+<ul>
+<li>Read (<code>r</code>) = 4, Write (<code>w</code>) = 2, Execute (<code>x</code>) = 1.</li>
+<li>Triplets: <code>[Owner][Group][Others]</code></li>
+<li><code>chmod 755 file.sh</code> $\rightarrow$ <code>rwxr-xr-x</code></li>
+<li><code>chmod 644 file.txt</code> $\rightarrow$ <code>rw-r--r--</code></li>
+</ul>
+<h3 id="symbolic-notation"><a href="#symbolic-notation" class="anchor-link">#</a> Symbolic Notation</h3>
+<ul>
+<li>Users: <code>u</code> (user/owner), <code>g</code> (group), <code>o</code> (others), <code>a</code> (all).</li>
+<li>Operators: <code>+</code> (add), <code>-</code> (remove), <code>=</code> (set exact).</li>
+<li><code>chmod u+x,g-w file</code></li>
+<li><code>chmod go=r file</code> (sets group and others to read-only).</li>
+</ul>
+<h3 id="the-umask-formula"><a href="#the-umask-formula" class="anchor-link">#</a> The `umask` Formula</h3>
+<p><code>umask</code> determines default permissions of newly created files and directories.</p>
+<ul>
+<li><strong>Base permissions:</strong></li>
+<li>New Directory base: <code>0777</code> (<code>rwxrwxrwx</code>)</li>
+<li>New Regular File base: <code>0666</code> (<code>rw-rw-rw-</code>) — *Execution bit is never granted by default for security.*</li>
+<li><strong>Calculation Rule:</strong></li>
+</ul>
+<p>$$\text{Effective Permission} = \text{Base} \mathbin{\&} \sim(\text{umask}) \quad \approx \quad \text{Base} - \text{umask}$$</p>
+<p><em>(Bitwise NOT operation; simple subtraction holds whenever bits do not borrow).</em></p>
+<h4 id="high-yield-examples"><a href="#high-yield-examples" class="anchor-link">#</a> High-Yield Examples:</h4>
+<ul>
+<li>If <code>umask = 022</code>:</li>
+<li>Directory: $777 - 022 = 755$ (<code>rwxr-xr-x</code>)</li>
+<li>File: $666 - 022 = 644$ (<code>rw-r--r--</code>)</li>
+<li>If <code>umask = 027</code>:</li>
+<li>Directory: $777 - 027 = 750$ (<code>rwxr-x---</code>)</li>
+<li>File: $666 - 027 = 640$ (<code>rw-r-----</code>)</li>
+<li>If <code>umask = 077</code>:</li>
+<li>Directory: $777 - 077 = 700$ (<code>rwx------</code>)</li>
+<li>File: $666 - 077 = 600$ (<code>rw-------</code>)</li>
+</ul>
+<hr>
+<h2 id="3-standard-streams-redirection"><a href="#3-standard-streams-redirection" class="anchor-link">#</a> 3. Standard Streams & Redirection</h2>
+<ul>
+<li><code>0</code>: <code>stdin</code> (Standard Input)</li>
+<li><code>1</code>: <code>stdout</code> (Standard Output)</li>
+<li><code>2</code>: <code>stderr</code> (Standard Error)</li>
+</ul>
+<div class="code-wrap">
+                    <div class="code-header"><span>text</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-wrap').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',1500)">Copy</button></div>
+                    <pre><code class="language-">        ┌──────────────┐  stdout (1)  ┌──────────────────┐
+stdin ─►│   Command    ├─────────────►│ file / terminal  │
+ (0)    └──────┬───────┘              └──────────────────┘
+               │ stderr (2)
+               ▼
+        ┌──────────────────┐
+        │ log / /dev/null  │
+        └──────────────────┘</code></pre>
+                </div>
+<h3 id="redirection-operators"><a href="#redirection-operators" class="anchor-link">#</a> Redirection Operators</h3>
+<ul>
+<li><code>cmd > file</code>: Overwrite stdout to file.</li>
+<li><code>cmd >> file</code>: Append stdout to file.</li>
+<li><code>cmd < file</code>: Read stdin from file.</li>
+<li><code>cmd 2> file</code>: Overwrite stderr to file.</li>
+<li><code>cmd 2>> file</code>: Append stderr to file.</li>
+<li><code>cmd > file 2>&1</code>: Combine both stdout and stderr into <code>file</code> (classic POSIX).</li>
+<li><code>cmd &> file</code> or <code>cmd >& file</code>: Bash shorthand for combining stdout and stderr.</li>
+<li><code>cmd 2> /dev/null</code>: Discard errors silently.</li>
+<li><code>cmd1 | cmd2</code>: Pipe stdout of <code>cmd1</code> to stdin of <code>cmd2</code> (stderr is NOT piped unless redirected with <code>|&</code> or <code>2>&1 |</code>).</li>
+<li><code>tee file</code>: Writes output to both stdout AND one or more files (<code>tee -a</code> for append).</li>
+</ul>
+<hr>
+<h2 id="4-text-processing-power-tools"><a href="#4-text-processing-power-tools" class="anchor-link">#</a> 4. Text Processing Power Tools</h2>
+<h3 id="grep-global-regular-expression-print"><a href="#grep-global-regular-expression-print" class="anchor-link">#</a> `grep` (Global Regular Expression Print)</h3>
+<ul>
+<li><code>grep -i</code>: Case-insensitive search.</li>
+<li><code>grep -v</code>: Invert match (print non-matching lines).</li>
+<li><code>grep -c</code>: Count matching lines only.</li>
+<li><code>grep -n</code>: Prefix matching line with its 1-based line number.</li>
+<li><code>grep -l</code>: List file names with matches (stops scanning file upon first match).</li>
+<li><code>grep -w</code>: Match whole words only.</li>
+<li><code>grep -E</code> (or <code>egrep</code>): Use Extended Regular Expressions (ERE).</li>
+<li><code>grep -o</code>: Print ONLY the matching string parts, one per line.</li>
+</ul>
+<h3 id="sort-uniq"><a href="#sort-uniq" class="anchor-link">#</a> `sort` & `uniq`</h3>
+<ul>
+<li><code>sort -n</code>: Numerical sort (sorts <code>10</code> after <code>2</code>, unlike lexicographical sort).</li>
+<li><code>sort -r</code>: Reverse order.</li>
+<li><code>sort -k <pos></code>: Sort on specific key/column (e.g. <code>sort -k 2,2</code>).</li>
+<li><code>sort -t <delim></code>: Specify field separator (e.g. <code>sort -t: -k3,3n /etc/passwd</code>).</li>
+<li><code>sort -u</code>: Sort and remove duplicates.</li>
+<li><code>uniq</code>: <strong>Requires sorted input!</strong></li>
+<li><code>uniq -c</code>: Prefix lines by the number of occurrences.</li>
+<li><code>uniq -d</code>: Output only repeated/duplicate lines.</li>
+<li><code>uniq -u</code>: Output only unique lines (lines that appeared exactly once).</li>
+</ul>
+<h3 id="cut-paste-tr"><a href="#cut-paste-tr" class="anchor-link">#</a> `cut`, `paste`, `tr`</h3>
+<ul>
+<li><code>cut -d',' -f2,4 data.csv</code>: Extract fields 2 and 4 separated by comma.</li>
+<li><code>cut -c1-10 file.txt</code>: Extract characters 1 to 10.</li>
+<li><code>paste -d',' f1 f2</code>: Merges lines of files side-by-side separated by delimiter.</li>
+<li><code>tr 'a-z' 'A-Z' < file</code>: Translates lowercase to uppercase (reads stdin only!).</li>
+<li><code>tr -d '0-9'</code>: Delete all specified characters.</li>
+<li><code>tr -s ' '</code>: Squeeze consecutive spaces into a single space.</li>
+</ul>
+<h3 id="head-tail-wc"><a href="#head-tail-wc" class="anchor-link">#</a> `head`, `tail`, `wc`</h3>
+<ul>
+<li><code>head -n 5 file</code>: First 5 lines.</li>
+<li><code>head -n -5 file</code>: All lines except the last 5 lines.</li>
+<li><code>tail -n 5 file</code>: Last 5 lines.</li>
+<li><code>tail -n +5 file</code>: From line 5 to end of file.</li>
+<li><code>tail -f file</code>: Follow growing file in real time.</li>
+<li><code>wc -l</code>: Count lines (<code>\n</code>).</li>
+<li><code>wc -w</code>: Count words.</li>
+<li><code>wc -c</code>: Count bytes (<code>-m</code> for characters).</li>
+</ul>
+<hr>
+<h2 id="5-regular-expressions-bre-vs-ere"><a href="#5-regular-expressions-bre-vs-ere" class="anchor-link">#</a> 5. Regular Expressions: BRE vs. ERE</h2>
+<div class="table-container"><table><thead><tr><th>Feature</th><th>Basic Regex (BRE - default `grep`, `sed`)</th><th>Extended Regex (ERE - `grep -E`, `egrep`, `awk`)</th></tr></thead><tbody><tr><td>**Alternation**</td><td>`\</td><td>` (must escape)</td><td>`</td><td>` (bare)</td></tr><tr><td>**Grouping**</td><td>`\(` and `\)`</td><td>`(` and `)`</td></tr><tr><td>**One or more (`+`)**</td><td>`\+`</td><td>`+`</td></tr><tr><td>**Zero or one (`?`)**</td><td>`\?`</td><td>`?`</td></tr><tr><td>**Intervals**</td><td>`\{m,n\}`</td><td>`{m,n}`</td></tr><tr><td>**Any character**</td><td>`.`</td><td>`.`</td></tr><tr><td>**Anchors**</td><td>`^` (start of line), `$` (end of line)</td><td>`^`, `$`</td></tr><tr><td>**Char Classes**</td><td>`[a-z]`, `[^0-9]` (negated)</td><td>`[a-z]`, `[^0-9]`</td></tr></tbody></table></div>
+<div class="alert alert-tip"><div class="alert-title">TIP</div>
+<blockquote><strong>Matching an IP address:</strong></blockquote>
+<blockquote><code>^([0-9]{1,3}\.){3}[0-9]{1,3}$</code> with <code>grep -E</code>.</blockquote>
+<blockquote><strong>Checking empty lines:</strong> <code>grep '^$' file</code></blockquote>
+<hr>
+<h2 id="6-advanced-shell-commands-find-sed"><a href="#6-advanced-shell-commands-find-sed" class="anchor-link">#</a> 6. Advanced Shell Commands: `find` & `sed`</h2>
+<h3 id="find-command"><a href="#find-command" class="anchor-link">#</a> `find` Command</h3>
+<p>Syntax: <code>find [path] [predicates] [actions]</code></p>
+<ul>
+<li>Predicates:</li>
+<li><code>-name "*.log"</code> (case sensitive), <code>-iname "*.log"</code> (case insensitive).</li>
+<li><code>-type f</code> (regular file), <code>-type d</code> (directory), <code>-type l</code> (symlink).</li>
+<li><code>-size +10M</code> (greater than 10MB), <code>-size -1k</code> (less than 1KB).</li>
+<li><code>-mtime -7</code> (modified within last 7 days), <code>-mtime +30</code> (modified over 30 days ago).</li>
+<li><code>-perm 755</code> (exact permissions).</li>
+<li>Actions:</li>
+<li><code>-exec cmd {} +</code>: Runs <code>cmd</code> passing all matching files as batch arguments (efficient!).</li>
+<li><code>-exec cmd {} \;</code>: Runs <code>cmd</code> once per found file.</li>
+<li><code>-delete</code>: Delete matching files directly.</li>
+</ul>
+<h3 id="sed-stream-editor"><a href="#sed-stream-editor" class="anchor-link">#</a> `sed` (Stream Editor)</h3>
+<p>Syntax: <code>sed [options] 'address command' file</code></p>
+<ul>
+<li>Substitution: <code>sed 's/pattern/replacement/g' file</code></li>
+<li><code>g</code>: Global (all occurrences per line).</li>
+<li><code>2</code>: Replace only 2nd occurrence per line.</li>
+<li><code>p</code>: Print matched line (used with <code>sed -n 's/.../.../p'</code>).</li>
+<li>Deletion:</li>
+<li><code>sed '5d' file</code>: Delete line 5.</li>
+<li><code>sed '1,3d' file</code>: Delete lines 1 to 3.</li>
+<li><code>sed '/^#/d' file</code>: Delete comment lines starting with <code>#</code>.</li>
+<li><code>sed '/pattern/!d' file</code>: Delete lines NOT matching pattern (equivalent to <code>grep</code>).</li>
+<li>In-place modification: <code>sed -i.bak 's/foo/bar/g' file.txt</code></li>
+</ul>
+<hr>
+<h2 id="7-process-execution-subshells-environment"><a href="#7-process-execution-subshells-environment" class="anchor-link">#</a> 7. Process Execution, Subshells & Environment</h2>
+<ul>
+<li><code>cmd &</code>: Run process in background (prints job number and PID <code>$!</code>).</li>
+<li><code>$$</code>: Current shell process ID (PID).</li>
+<li><code>$!</code>: Process ID of most recently backgrounded command.</li>
+<li><code>$?</code>: Exit status of last foreground command (<code>0</code> = success, non-zero = error).</li>
+<li>Subshell <code>( cd /tmp && ls )</code>: Runs inside a separate child process. Working directory and environment variable modifications do NOT affect the parent shell.</li>
+<li>Command Grouping <code>{ cd /tmp; ls; }</code>: Runs in the <strong>current shell context</strong> (semicolon and trailing space before <code>}</code> required).</li>
+<li>Environment vs. Shell Variables:</li>
+<li><code>VAR="val"</code>: Local shell variable (not inherited by child processes/subshells).</li>
+<li><code>export VAR="val"</code>: Exported environment variable (inherited by child processes).</li>
+<li><code>printenv</code> / <code>env</code>: Lists exported environment variables.</li>
+<li><code>set</code>: Lists ALL shell variables, environment variables, and functions.</li>
+</ul>
+<h3 id="vi-vim-quick-reference"><a href="#vi-vim-quick-reference" class="anchor-link">#</a> Vi / Vim Quick Reference</h3>
+<ul>
+<li>Command mode to Insert mode: <code>i</code> (insert before cursor), <code>a</code> (append after cursor), <code>o</code> (open new line below).</li>
+<li>Deleting text: <code>dd</code> (delete current line), <code>7dd</code> (delete 7 lines), <code>dw</code> (delete word), <code>x</code> (delete character).</li>
+<li>Saving & Exiting: <code>:w</code> (save), <code>:q</code> (quit), <code>:wq</code> or <code>:x</code> or <code>ZZ</code> (save and quit), <code>:q!</code> (quit without saving).</li>
+<li>Jump to line: <code>:<number></code> (e.g. <code>:7</code> goes to line 7), <code>G</code> (end of file), <code>gg</code> (start of file).</li>
+</ul>
+<hr>
+<h1 id="part-2-database-management-systems-cs2001"><a href="#part-2-database-management-systems-cs2001" class="anchor-link">#</a> PART 2: DATABASE MANAGEMENT SYSTEMS (CS2001)</h1>
+<div class="code-wrap">
+                    <div class="code-header"><span>text</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-wrap').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',1500)">Copy</button></div>
+                    <pre><code class="language-">                            Three-Schema Architecture
+┌────────────────────────────────────────────────────────────────────────┐
+│  View Level (External Schema): User views, tailored security           │
+├────────────────────────────────────────────────────────────────────────┤
+│  Logical Level (Conceptual Schema): Tables, Constraints, Relationships │
+├────────────────────────────────────────────────────────────────────────┤
+│  Physical Level (Internal Schema): Storage structures, B+ Trees, Files │
+└────────────────────────────────────────────────────────────────────────┘</code></pre>
+                </div>
+<hr>
+<h2 id="1-dbms-fundamentals-data-independence"><a href="#1-dbms-fundamentals-data-independence" class="anchor-link">#</a> 1. DBMS Fundamentals & Data Independence</h2>
+<ul>
+<li><strong>Data Redundancy & Inconsistency:</strong> Primary drawbacks of flat-file systems resolved by DBMS through centralization and normalization.</li>
+<li><strong>Physical Data Independence:</strong> Ability to modify physical schema (storage devices, indexes, access paths) without altering conceptual/logical schemas or application programs.</li>
+<li><strong>Logical Data Independence:</strong> Ability to alter logical schema (adding columns, tables) without changing external views or existing queries (harder to achieve).</li>
+<li><strong>Relational Model Terminology:</strong></li>
+<li><strong>Relation</strong> $\leftrightarrow$ Table</li>
+<li><strong>Tuple</strong> $\leftrightarrow$ Row / Record</li>
+<li><strong>Attribute</strong> $\leftrightarrow$ Column / Field</li>
+<li><strong>Domain</strong> $\leftrightarrow$ Set of permissible atomic values for an attribute</li>
+<li><strong>Degree (Arity)</strong> $\leftrightarrow$ Number of attributes (columns)</li>
+<li><strong>Cardinality</strong> $\leftrightarrow$ Number of tuples (rows)</li>
+</ul>
+<hr>
+<h2 id="2-integrity-constraints-foreign-keys"><a href="#2-integrity-constraints-foreign-keys" class="anchor-link">#</a> 2. Integrity Constraints & Foreign Keys</h2>
+<p>1. <strong>Domain Constraints:</strong> Values must be atomic and match column data types (e.g. <code>Age > 0</code>).</p>
+<p>2. <strong>Entity Integrity:</strong> <strong>Primary Key attributes cannot be NULL</strong> (ensures every entity is uniquely distinguishable).</p>
+<p>3. <strong>Key Constraints:</strong> Candidate keys must be minimal super keys; primary key enforces uniqueness.</p>
+<p>4. <strong>Referential Integrity (Foreign Key):</strong></p>
+<ul>
+<li>A foreign key $FK$ in child relation $R_1$ referencing primary key $PK$ in parent relation $R_2$ requires that:</li>
+</ul>
+<p>For every tuple in $R_1$, $FK$ must either be <strong>NULL</strong> OR <strong>match an existing $PK$ value in $R_2$</strong>.</p>
+<ul>
+<li>Action triggers on update/delete of referenced parent row:</li>
+<li><code>ON DELETE CASCADE</code>: Deletes child rows when parent is deleted.</li>
+<li><code>ON DELETE SET NULL</code>: Sets child foreign key to NULL (invalid if child column is <code>NOT NULL</code>).</li>
+<li><code>ON DELETE RESTRICT</code> / <code>NO ACTION</code>: Rejects parent deletion if child references exist.</li>
+</ul>
+<hr>
+<h2 id="3-relational-algebra-toolkit"><a href="#3-relational-algebra-toolkit" class="anchor-link">#</a> 3. Relational Algebra Toolkit</h2>
+<div class="code-wrap">
+                    <div class="code-header"><span>text</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-wrap').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',1500)">Copy</button></div>
+                    <pre><code class="language-">  Basic Operators:
+  σ (Select Rows)  │  π (Project Cols)  │  × (Cartesian Product)
+  ∪ (Set Union)    │  - (Set Difference)│  ρ (Rename)</code></pre>
+                </div>
+<h3 id="core-operations"><a href="#core-operations" class="anchor-link">#</a> Core Operations</h3>
+<ul>
+<li><strong>Selection ($\sigma_{\text{condition}}(R)$):</strong> Filters rows satisfying the condition.</li>
+<li>Cardinality: $0 \le |\sigma(R)| \le |R|$.</li>
+<li>Degree: Unchanged (same columns as $R$).</li>
+<li><strong>Projection ($\pi_{A_1, A_2}(R)$):</strong> Selects specified columns and <strong>removes duplicate rows</strong> (relational algebra relations are sets).</li>
+<li>Cardinality: $1 \le |\pi(R)| \le |R|$ (if $|R| \ge 1$).</li>
+<li>Degree: Number of attributes projected.</li>
+<li><strong>Cartesian Product ($R \times S$):</strong></li>
+<li>Cardinality: $|R \times S| = |R| \times |S|$.</li>
+<li>Degree: $\text{Degree}(R) + \text{Degree}(S)$.</li>
+<li><strong>Natural Join ($R \bowtie S$):</strong> Equi-join on all common attribute names followed by projection eliminating duplicate common columns.</li>
+<li>Max tuples: $|R| \times |S|$ (if common attributes contain identical values everywhere).</li>
+<li>Min tuples: $0$ (if no values match on common attributes).</li>
+<li><strong>Division Operator ($R \div S$):</strong> Used for "FOR ALL" / "EVERY" queries.</li>
+<li>Output has attributes $\text{Attr}(R) - \text{Attr}(S)$.</li>
+<li>Tuple $t \in R \div S$ iff for every tuple $s \in S$, tuple $(t, s) \in R$.</li>
+</ul>
+<h4 id="cardinality-calculations"><a href="#cardinality-calculations" class="anchor-link">#</a> Cardinality Calculations:</h4>
+<ul>
+<li>If $R(A, B)$ has $n$ rows and $S(B, C)$ has $m$ rows:</li>
+<li>Minimum rows in $R \bowtie S$: <strong>$0$</strong> (no matches).</li>
+<li>If $B$ is a foreign key in $R$ referencing primary key $B$ in $S$: Exactly <strong>$n$ rows</strong> (every row in $R$ matches exactly 1 row in $S$).</li>
+<li>Maximum rows in $R \bowtie S$: <strong>$n \times m$</strong> (when all $B$ values in both relations are identical).</li>
+</ul>
+<hr>
+<h2 id="4-tuple-relational-calculus-trc"><a href="#4-tuple-relational-calculus-trc" class="anchor-link">#</a> 4. Tuple Relational Calculus (TRC)</h2>
+<p>Non-procedural query language: $\{t \mid P(t)\}$</p>
+<ul>
+<li><strong>Existential Quantifier ($\exists$):</strong> "There exists at least one tuple"</li>
+</ul>
+<p>$$\{t \mid t \in \text{Employee} \land (\exists d \in \text{Department})(d.\text{dname} = 'IT' \land t.\text{dept\_id} = d.\text{dept\_id})\}$$</p>
+<ul>
+<li><strong>Universal Quantifier ($\forall$):</strong> "For all tuples"</li>
+<li><strong>Equivalence identity:</strong></li>
+</ul>
+<p>$$\forall x \, P(x) \equiv \neg \exists x \, (\neg P(x))$$</p>
+<hr>
+<h2 id="5-sql-execution-order-advanced-syntax"><a href="#5-sql-execution-order-advanced-syntax" class="anchor-link">#</a> 5. SQL Execution Order & Advanced Syntax</h2>
+<h3 id="sql-logical-query-processing-order"><a href="#sql-logical-query-processing-order" class="anchor-link">#</a> SQL Logical Query Processing Order</h3>
+<p>Writing SQL differs from how the database engine executes it:</p>
+<p>$$\text{FROM} \longrightarrow \text{WHERE} \longrightarrow \text{GROUP BY} \longrightarrow \text{HAVING} \longrightarrow \text{SELECT} \longrightarrow \text{DISTINCT} \longrightarrow \text{ORDER BY}$$</p>
+<div class="alert alert-caution"><div class="alert-title">CAUTION</div>
+<blockquote>Column aliases defined in <code>SELECT</code> cannot be referenced in <code>WHERE</code> or <code>GROUP BY</code> because <code>SELECT</code> is evaluated after them!</blockquote>
+<h3 id="where-vs-having"><a href="#where-vs-having" class="anchor-link">#</a> `WHERE` vs. `HAVING`</h3>
+<ul>
+<li><code>WHERE</code>: Filters individual records <strong>before aggregation</strong>. Cannot use aggregate functions (<code>WHERE salary > 50000</code>).</li>
+<li><code>HAVING</code>: Filters aggregated groups <strong>after aggregation</strong>. Uses aggregate functions (<code>HAVING COUNT(*) > 5</code>).</li>
+</ul>
+<h3 id="subquery-operators"><a href="#subquery-operators" class="anchor-link">#</a> Subquery Operators:</h3>
+<ul>
+<li><code>IN / NOT IN</code>: Membership test against a list or subquery.</li>
+</ul>
+<p><em>(Watch out for NULLs in <code>NOT IN</code>: if subquery returns any NULL, <code>NOT IN</code> evaluates to UNKNOWN/false for all rows!)</em></p>
+<ul>
+<li><code>EXISTS / NOT EXISTS</code>: Returns TRUE if the correlated subquery returns at least 1 row. Highly efficient because DB stops scanning on first hit.</li>
+<li><code>ANY / SOME</code>:</li>
+<li><code>x > ANY (SELECT ...)</code>: Greater than the <strong>minimum</strong> of the subquery values.</li>
+<li><code>ALL</code>:</li>
+<li><code>x > ALL (SELECT ...)</code>: Greater than the <strong>maximum</strong> of the subquery values.</li>
+</ul>
+<hr>
+<h2 id="6-entity-relationship-er-modeling"><a href="#6-entity-relationship-er-modeling" class="anchor-link">#</a> 6. Entity-Relationship (ER) Modeling</h2>
+<div class="code-wrap">
+                    <div class="code-header"><span>text</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-wrap').querySelector('code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',1500)">Copy</button></div>
+                    <pre><code class="language-">  ┌─────────────┐        ◇───────────◇        ┌─────────────┐
+  │   Student   ├───(M)──┤  Enrolls  ├───(N)──┤   Course    │
+  └─────────────┘        ◇───────────◇        └─────────────┘</code></pre>
+                </div>
+<h3 id="components"><a href="#components" class="anchor-link">#</a> Components</h3>
+<ul>
+<li><strong>Entity:</strong> An independently identifiable object in real world.</li>
+<li><strong>Weak Entity Set:</strong> An entity set that does not have sufficient attributes to form a primary key.</li>
+<li>Represented by <strong>double rectangle</strong>.</li>
+<li>Depends on an <strong>identifying entity set</strong> via an <strong>identifying relationship</strong> (represented by <strong>double diamond</strong>).</li>
+<li>Has a <strong>discriminator / partial key</strong> (underlined with dashed/dotted line).</li>
+<li>Must have <strong>total participation</strong> in the identifying relationship.</li>
+<li>Primary key of weak entity = <strong>Primary key of identifying entity + Discriminator</strong>.</li>
+<li><strong>Attributes:</strong></li>
+<li>Simple vs. Composite (<code>Address</code> broken into <code>City, State, Zip</code>).</li>
+<li>Single-valued vs. Multi-valued (double oval, e.g. <code>{PhoneNumbers}</code>).</li>
+<li>Derived (dashed oval, e.g. <code>Age</code> derived from <code>DOB</code>).</li>
+</ul>
+<h3 id="cardinality-ratios-table-reduction-rules"><a href="#cardinality-ratios-table-reduction-rules" class="anchor-link">#</a> Cardinality Ratios & Table Reduction Rules</h3>
+<p>1. <strong>Many-to-Many ($M:N$):</strong></p>
+<ul>
+<li>Cannot merge tables.</li>
+<li>Requires <strong>3 tables</strong>: Entity $E_1$, Entity $E_2$, and Relationship table $R$.</li>
+<li>Primary key of relationship table $R$ is the composite key $(PK_{E_1}, PK_{E_2})$.</li>
+</ul>
+<p>2. <strong>One-to-Many ($1:N$):</strong></p>
+<ul>
+<li>Can be represented with <strong>2 tables</strong> by embedding the primary key of the "1" side as a foreign key on the "N" (Many) side table.</li>
+</ul>
+<p>3. <strong>One-to-One ($1:1$):</strong></p>
+<ul>
+<li>If one side has <strong>total participation</strong>, place foreign key in that side's table to avoid NULLs.</li>
+<li>If both sides have total participation, relations can be <strong>merged into a single table</strong>.</li>
+</ul>
+<p>4. <strong>Multi-valued Attributes:</strong></p>
+<ul>
+<li>Each multi-valued attribute requires its <strong>own separate table</strong> with $(PK_{\text{Entity}}, \text{AttributeValue})$ as primary key.</li>
+</ul>
+<hr>
+<h2 id="7-functional-dependencies-normalization-bonus-week-5"><a href="#7-functional-dependencies-normalization-bonus-week-5" class="anchor-link">#</a> 7. Functional Dependencies & Normalization (Bonus Week 5)</h2>
+<ul>
+<li><strong>Functional Dependency ($X \to Y$):</strong> If two tuples agree on attribute set $X$, they must agree on attribute set $Y$.</li>
+<li><strong>Attribute Closure ($X^+$):</strong> Set of all attributes functionally determined by $X$ under given $F$.</li>
+<li>If $X^+ = R$, then $X$ is a <strong>Super Key</strong>.</li>
+<li>If $X$ is a super key and no proper subset of $X$ is a super key, $X$ is a <strong>Candidate Key</strong>.</li>
+<li><strong>Super Key Count Formula:</strong></li>
+</ul>
+<p>If relation $R$ has $n$ attributes and a candidate key has $k$ attributes:</p>
+<p>$$\text{Number of Super Keys} = 2^{n - k}$$</p>
+<ul>
+<li><strong>Lossless Join Decomposition Condition:</strong></li>
+</ul>
+<p>Decomposition of $R$ into $R_1$ and $R_2$ is lossless if and only if:</p>
+<p>$$(R_1 \cap R_2) \to R_1 \quad \text{OR} \quad (R_1 \cap R_2) \to R_2$$</p>
+<p><em>(i.e. The intersection attributes must form a super key for at least one of the decomposed tables).</em></p>
+<hr>
+<h1 id="part-3-top-10-exam-traps-formulas-cheat-sheet"><a href="#part-3-top-10-exam-traps-formulas-cheat-sheet" class="anchor-link">#</a> PART 3: TOP 10 EXAM TRAPS & FORMULAS CHEAT SHEET</h1>
+<p>1. <strong><code>grep</code> vs <code>find -exec</code>:</strong></p>
+<ul>
+<li><code>find . -name "*.txt" -exec grep -l "pattern" {} +</code>: Efficient, spawns single grep.</li>
+<li><code>find . -name "*.txt" | xargs grep "pattern"</code>: Standard alternative.</li>
+</ul>
+<p>2. <strong><code>umask</code> on files vs directories:</strong></p>
+<ul>
+<li>File default maximum is <code>666</code>, NEVER <code>777</code>. Subtraction cannot result in execution bits on files unless explicitly set by <code>chmod</code>.</li>
+</ul>
+<p>3. <strong>Hard link deletion:</strong></p>
+<ul>
+<li>Deleting file does NOT delete data if hard links exist. Deleting file DOES break symbolic links.</li>
+</ul>
+<p>4. <strong>Relational Algebra duplicate elimination:</strong></p>
+<ul>
+<li>$\pi$ (projection) eliminates duplicates by mathematical definition! In SQL, <code>SELECT</code> preserves duplicates unless <code>DISTINCT</code> is specified.</li>
+</ul>
+<p>5. <strong>Foreign key NULLs:</strong></p>
+<ul>
+<li>A foreign key CAN be NULL unless explicitly declared with <code>NOT NULL</code> constraint.</li>
+</ul>
+<p>6. <strong>Cartesian Product Degrees and Cardinalities:</strong></p>
+<ul>
+<li>Degree adds: $\text{deg}(R \times S) = \text{deg}(R) + \text{deg}(S)$.</li>
+<li>Cardinality multiplies: $|R \times S| = |R| \times |S|$.</li>
+</ul>
+<p>7. <strong><code>COUNT(*)</code> vs <code>COUNT(column)</code>:</strong></p>
+<ul>
+<li><code>COUNT(*)</code> counts all rows including NULLs.</li>
+<li><code>COUNT(col)</code> counts only rows where <code>col</code> IS NOT NULL.</li>
+</ul>
+<p>8. <strong>Weak entity primary key:</strong></p>
+<ul>
+<li>Identifying owner's PK + Weak entity discriminator.</li>
+</ul>
+<p>9. <strong><code>sort</code> before <code>uniq</code>:</strong></p>
+<ul>
+<li>Always pipe <code>sort</code> before <code>uniq</code> (<code>sort | uniq -c</code>).</li>
+</ul>
+<p>10. <strong>Redirection order:</strong></p>
+<ul>
+<li><code>cmd > file 2>&1</code> directs stdout to <code>file</code>, then stderr to same destination as stdout.</li>
+<li><code>cmd 2>&1 > file</code> directs stderr to terminal (current stdout), then stdout to <code>file</code> (NOT the same!).</li>
+</ul>
     </main>
 
     <button class="fab-toc" onclick="toggleTOC()">
         📑 Jump to Topic
     </button>
 
-    <script id="raw-markdown" type="text/plain">"# IIT Madras BS Degree \u2014 Quiz 1 High-Yield Crash Course\n**Exam Date:** Sunday, November 15, 2026 (2:00 PM \u2013 6:00 PM IST)  \n**Courses Covered:**\n1. **System Commands (SE2001)** \u2014 Weeks 1 to 4 (plus Week 5 Shell Essentials)\n2. **Database Management Systems (CS2001)** \u2014 Weeks 1 to 4 (plus Week 5 Functional Dependencies & Normalization)\n\n---\n\n# PART 1: SYSTEM COMMANDS (SE2001)\n\n```\n                            Linux System Architecture\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502  User Space: Shell (bash/sh), Core Utilities (grep, find, sed, awk)   \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Kernel Space: Process Mgmt, Virtual File System (VFS), Inodes, IPC   \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Hardware: Storage Blocks, CPU, RAM, Network Interfaces               \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## 1. Linux Filesystem & Inode Mechanics\n\n### The Inode (Index Node)\nAn inode stores metadata about a file. Crucially, **the file name is NOT stored in the inode** (it is stored in the directory entry that maps the name to an inode number).\n* **Stored in Inode:** File type, permissions, owner UID, group GID, file size, timestamps (access `atime`, modification `mtime`, change `ctime`), link count, pointers to data blocks.\n* **Commands:**\n  * `ls -i <file>`: Displays the inode number.\n  * `stat <file>`: Full dump of inode attributes.\n  * `df -i`: Filesystem inode usage (can run out of inodes even if disk space remains).\n\n### Hard Links vs. Symbolic (Soft) Links\n| Feature | Hard Link (`ln target linkname`) | Symbolic Link (`ln -s target linkname`) |\n| :--- | :--- | :--- |\n| **Inode** | Shares the **exact same inode** as target | Has its **own distinct inode** |\n| **Data Blocks** | Points directly to target's data blocks | Stores target's **path string** in its block |\n| **Link Count** | Increments target inode's link count by 1 | Target link count is **unaffected** |\n| **Deleting Target** | File data persists! Link count decrements by 1 | Link becomes a **broken / dangling link** |\n| **Directories** | Cannot hard link directories (prevents loops) | Can link directories |\n| **Cross-Filesystem** | **Cannot** span across different filesystems | **Can** span across different filesystems/mounts |\n\n> [!IMPORTANT]\n> If a file has 3 hard links and you `rm` the original file, the data blocks remain intact until link count drops to 0 AND all open file descriptors close.\n\n---\n\n## 2. Permissions & `umask` Arithmetic\n\n### Octal Representation\n* Read (`r`) = 4, Write (`w`) = 2, Execute (`x`) = 1.\n* Triplets: `[Owner][Group][Others]`\n  * `chmod 755 file.sh` $\\rightarrow$ `rwxr-xr-x`\n  * `chmod 644 file.txt` $\\rightarrow$ `rw-r--r--`\n\n### Symbolic Notation\n* Users: `u` (user/owner), `g` (group), `o` (others), `a` (all).\n* Operators: `+` (add), `-` (remove), `=` (set exact).\n  * `chmod u+x,g-w file`\n  * `chmod go=r file` (sets group and others to read-only).\n\n### The `umask` Formula\n`umask` determines default permissions of newly created files and directories.\n* **Base permissions:**\n  * New Directory base: `0777` (`rwxrwxrwx`)\n  * New Regular File base: `0666` (`rw-rw-rw-`) \u2014 *Execution bit is never granted by default for security.*\n* **Calculation Rule:**\n  $$\\text{Effective Permission} = \\text{Base} \\mathbin{\\&} \\sim(\\text{umask}) \\quad \\approx \\quad \\text{Base} - \\text{umask}$$\n  *(Bitwise NOT operation; simple subtraction holds whenever bits do not borrow).*\n\n#### High-Yield Examples:\n* If `umask = 022`:\n  * Directory: $777 - 022 = 755$ (`rwxr-xr-x`)\n  * File: $666 - 022 = 644$ (`rw-r--r--`)\n* If `umask = 027`:\n  * Directory: $777 - 027 = 750$ (`rwxr-x---`)\n  * File: $666 - 027 = 640$ (`rw-r-----`)\n* If `umask = 077`:\n  * Directory: $777 - 077 = 700$ (`rwx------`)\n  * File: $666 - 077 = 600$ (`rw-------`)\n\n---\n\n## 3. Standard Streams & Redirection\n\n* `0`: `stdin` (Standard Input)\n* `1`: `stdout` (Standard Output)\n* `2`: `stderr` (Standard Error)\n\n```\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  stdout (1)  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\nstdin \u2500\u25ba\u2502   Command    \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 file / terminal  \u2502\n (0)    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518              \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n               \u2502 stderr (2)\n               \u25bc\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u2502 log / /dev/null  \u2502\n        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n### Redirection Operators\n* `cmd > file`: Overwrite stdout to file.\n* `cmd >> file`: Append stdout to file.\n* `cmd < file`: Read stdin from file.\n* `cmd 2> file`: Overwrite stderr to file.\n* `cmd 2>> file`: Append stderr to file.\n* `cmd > file 2>&1`: Combine both stdout and stderr into `file` (classic POSIX).\n* `cmd &> file` or `cmd >& file`: Bash shorthand for combining stdout and stderr.\n* `cmd 2> /dev/null`: Discard errors silently.\n* `cmd1 | cmd2`: Pipe stdout of `cmd1` to stdin of `cmd2` (stderr is NOT piped unless redirected with `|&` or `2>&1 |`).\n* `tee file`: Writes output to both stdout AND one or more files (`tee -a` for append).\n\n---\n\n## 4. Text Processing Power Tools\n\n### `grep` (Global Regular Expression Print)\n* `grep -i`: Case-insensitive search.\n* `grep -v`: Invert match (print non-matching lines).\n* `grep -c`: Count matching lines only.\n* `grep -n`: Prefix matching line with its 1-based line number.\n* `grep -l`: List file names with matches (stops scanning file upon first match).\n* `grep -w`: Match whole words only.\n* `grep -E` (or `egrep`): Use Extended Regular Expressions (ERE).\n* `grep -o`: Print ONLY the matching string parts, one per line.\n\n### `sort` & `uniq`\n* `sort -n`: Numerical sort (sorts `10` after `2`, unlike lexicographical sort).\n* `sort -r`: Reverse order.\n* `sort -k <pos>`: Sort on specific key/column (e.g. `sort -k 2,2`).\n* `sort -t <delim>`: Specify field separator (e.g. `sort -t: -k3,3n /etc/passwd`).\n* `sort -u`: Sort and remove duplicates.\n* `uniq`: **Requires sorted input!**\n  * `uniq -c`: Prefix lines by the number of occurrences.\n  * `uniq -d`: Output only repeated/duplicate lines.\n  * `uniq -u`: Output only unique lines (lines that appeared exactly once).\n\n### `cut`, `paste`, `tr`\n* `cut -d',' -f2,4 data.csv`: Extract fields 2 and 4 separated by comma.\n* `cut -c1-10 file.txt`: Extract characters 1 to 10.\n* `paste -d',' f1 f2`: Merges lines of files side-by-side separated by delimiter.\n* `tr 'a-z' 'A-Z' < file`: Translates lowercase to uppercase (reads stdin only!).\n* `tr -d '0-9'`: Delete all specified characters.\n* `tr -s ' '`: Squeeze consecutive spaces into a single space.\n\n### `head`, `tail`, `wc`\n* `head -n 5 file`: First 5 lines.\n* `head -n -5 file`: All lines except the last 5 lines.\n* `tail -n 5 file`: Last 5 lines.\n* `tail -n +5 file`: From line 5 to end of file.\n* `tail -f file`: Follow growing file in real time.\n* `wc -l`: Count lines (`\\n`).\n* `wc -w`: Count words.\n* `wc -c`: Count bytes (`-m` for characters).\n\n---\n\n## 5. Regular Expressions: BRE vs. ERE\n\n| Feature | Basic Regex (BRE - default `grep`, `sed`) | Extended Regex (ERE - `grep -E`, `egrep`, `awk`) |\n| :--- | :--- | :--- |\n| **Alternation** | `\\|` (must escape) | `|` (bare) |\n| **Grouping** | `\\(` and `\\)` | `(` and `)` |\n| **One or more (`+`)** | `\\+` | `+` |\n| **Zero or one (`?`)** | `\\?` | `?` |\n| **Intervals** | `\\{m,n\\}` | `{m,n}` |\n| **Any character** | `.` | `.` |\n| **Anchors** | `^` (start of line), `$` (end of line) | `^`, `$` |\n| **Char Classes** | `[a-z]`, `[^0-9]` (negated) | `[a-z]`, `[^0-9]` |\n\n> [!TIP]\n> **Matching an IP address:**\n> `^([0-9]{1,3}\\.){3}[0-9]{1,3}$` with `grep -E`.\n> **Checking empty lines:** `grep '^$' file`\n\n---\n\n## 6. Advanced Shell Commands: `find` & `sed`\n\n### `find` Command\nSyntax: `find [path] [predicates] [actions]`\n* Predicates:\n  * `-name \"*.log\"` (case sensitive), `-iname \"*.log\"` (case insensitive).\n  * `-type f` (regular file), `-type d` (directory), `-type l` (symlink).\n  * `-size +10M` (greater than 10MB), `-size -1k` (less than 1KB).\n  * `-mtime -7` (modified within last 7 days), `-mtime +30` (modified over 30 days ago).\n  * `-perm 755` (exact permissions).\n* Actions:\n  * `-exec cmd {} +`: Runs `cmd` passing all matching files as batch arguments (efficient!).\n  * `-exec cmd {} \\;`: Runs `cmd` once per found file.\n  * `-delete`: Delete matching files directly.\n\n### `sed` (Stream Editor)\nSyntax: `sed [options] 'address command' file`\n* Substitution: `sed 's/pattern/replacement/g' file`\n  * `g`: Global (all occurrences per line).\n  * `2`: Replace only 2nd occurrence per line.\n  * `p`: Print matched line (used with `sed -n 's/.../.../p'`).\n* Deletion:\n  * `sed '5d' file`: Delete line 5.\n  * `sed '1,3d' file`: Delete lines 1 to 3.\n  * `sed '/^#/d' file`: Delete comment lines starting with `#`.\n  * `sed '/pattern/!d' file`: Delete lines NOT matching pattern (equivalent to `grep`).\n* In-place modification: `sed -i.bak 's/foo/bar/g' file.txt`\n\n---\n\n## 7. Process Execution, Subshells & Environment\n\n* `cmd &`: Run process in background (prints job number and PID `$!`).\n* `$$`: Current shell process ID (PID).\n* `$!`: Process ID of most recently backgrounded command.\n* `$?`: Exit status of last foreground command (`0` = success, non-zero = error).\n* Subshell `( cd /tmp && ls )`: Runs inside a separate child process. Working directory and environment variable modifications do NOT affect the parent shell.\n* Command Grouping `{ cd /tmp; ls; }`: Runs in the **current shell context** (semicolon and trailing space before `}` required).\n* Environment vs. Shell Variables:\n  * `VAR=\"val\"`: Local shell variable (not inherited by child processes/subshells).\n  * `export VAR=\"val\"`: Exported environment variable (inherited by child processes).\n  * `printenv` / `env`: Lists exported environment variables.\n  * `set`: Lists ALL shell variables, environment variables, and functions.\n\n### Vi / Vim Quick Reference\n* Command mode to Insert mode: `i` (insert before cursor), `a` (append after cursor), `o` (open new line below).\n* Deleting text: `dd` (delete current line), `7dd` (delete 7 lines), `dw` (delete word), `x` (delete character).\n* Saving & Exiting: `:w` (save), `:q` (quit), `:wq` or `:x` or `ZZ` (save and quit), `:q!` (quit without saving).\n* Jump to line: `:<number>` (e.g. `:7` goes to line 7), `G` (end of file), `gg` (start of file).\n\n---\n\n# PART 2: DATABASE MANAGEMENT SYSTEMS (CS2001)\n\n```\n                            Three-Schema Architecture\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502  View Level (External Schema): User views, tailored security           \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Logical Level (Conceptual Schema): Tables, Constraints, Relationships \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502  Physical Level (Internal Schema): Storage structures, B+ Trees, Files \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n---\n\n## 1. DBMS Fundamentals & Data Independence\n\n* **Data Redundancy & Inconsistency:** Primary drawbacks of flat-file systems resolved by DBMS through centralization and normalization.\n* **Physical Data Independence:** Ability to modify physical schema (storage devices, indexes, access paths) without altering conceptual/logical schemas or application programs.\n* **Logical Data Independence:** Ability to alter logical schema (adding columns, tables) without changing external views or existing queries (harder to achieve).\n* **Relational Model Terminology:**\n  * **Relation** $\\leftrightarrow$ Table\n  * **Tuple** $\\leftrightarrow$ Row / Record\n  * **Attribute** $\\leftrightarrow$ Column / Field\n  * **Domain** $\\leftrightarrow$ Set of permissible atomic values for an attribute\n  * **Degree (Arity)** $\\leftrightarrow$ Number of attributes (columns)\n  * **Cardinality** $\\leftrightarrow$ Number of tuples (rows)\n\n---\n\n## 2. Integrity Constraints & Foreign Keys\n\n1. **Domain Constraints:** Values must be atomic and match column data types (e.g. `Age > 0`).\n2. **Entity Integrity:** **Primary Key attributes cannot be NULL** (ensures every entity is uniquely distinguishable).\n3. **Key Constraints:** Candidate keys must be minimal super keys; primary key enforces uniqueness.\n4. **Referential Integrity (Foreign Key):**\n   * A foreign key $FK$ in child relation $R_1$ referencing primary key $PK$ in parent relation $R_2$ requires that:\n     For every tuple in $R_1$, $FK$ must either be **NULL** OR **match an existing $PK$ value in $R_2$**.\n   * Action triggers on update/delete of referenced parent row:\n     * `ON DELETE CASCADE`: Deletes child rows when parent is deleted.\n     * `ON DELETE SET NULL`: Sets child foreign key to NULL (invalid if child column is `NOT NULL`).\n     * `ON DELETE RESTRICT` / `NO ACTION`: Rejects parent deletion if child references exist.\n\n---\n\n## 3. Relational Algebra Toolkit\n\n```\n  Basic Operators:\n  \u03c3 (Select Rows)  \u2502  \u03c0 (Project Cols)  \u2502  \u00d7 (Cartesian Product)\n  \u222a (Set Union)    \u2502  - (Set Difference)\u2502  \u03c1 (Rename)\n```\n\n### Core Operations\n* **Selection ($\\sigma_{\\text{condition}}(R)$):** Filters rows satisfying the condition.\n  * Cardinality: $0 \\le |\\sigma(R)| \\le |R|$.\n  * Degree: Unchanged (same columns as $R$).\n* **Projection ($\\pi_{A_1, A_2}(R)$):** Selects specified columns and **removes duplicate rows** (relational algebra relations are sets).\n  * Cardinality: $1 \\le |\\pi(R)| \\le |R|$ (if $|R| \\ge 1$).\n  * Degree: Number of attributes projected.\n* **Cartesian Product ($R \\times S$):**\n  * Cardinality: $|R \\times S| = |R| \\times |S|$.\n  * Degree: $\\text{Degree}(R) + \\text{Degree}(S)$.\n* **Natural Join ($R \\bowtie S$):** Equi-join on all common attribute names followed by projection eliminating duplicate common columns.\n  * Max tuples: $|R| \\times |S|$ (if common attributes contain identical values everywhere).\n  * Min tuples: $0$ (if no values match on common attributes).\n* **Division Operator ($R \\div S$):** Used for \"FOR ALL\" / \"EVERY\" queries.\n  * Output has attributes $\\text{Attr}(R) - \\text{Attr}(S)$.\n  * Tuple $t \\in R \\div S$ iff for every tuple $s \\in S$, tuple $(t, s) \\in R$.\n\n#### Cardinality Calculations:\n* If $R(A, B)$ has $n$ rows and $S(B, C)$ has $m$ rows:\n  * Minimum rows in $R \\bowtie S$: **$0$** (no matches).\n  * If $B$ is a foreign key in $R$ referencing primary key $B$ in $S$: Exactly **$n$ rows** (every row in $R$ matches exactly 1 row in $S$).\n  * Maximum rows in $R \\bowtie S$: **$n \\times m$** (when all $B$ values in both relations are identical).\n\n---\n\n## 4. Tuple Relational Calculus (TRC)\n\nNon-procedural query language: $\\{t \\mid P(t)\\}$\n* **Existential Quantifier ($\\exists$):** \"There exists at least one tuple\"\n  $$\\{t \\mid t \\in \\text{Employee} \\land (\\exists d \\in \\text{Department})(d.\\text{dname} = 'IT' \\land t.\\text{dept\\_id} = d.\\text{dept\\_id})\\}$$\n* **Universal Quantifier ($\\forall$):** \"For all tuples\"\n* **Equivalence identity:**\n  $$\\forall x \\, P(x) \\equiv \\neg \\exists x \\, (\\neg P(x))$$\n\n---\n\n## 5. SQL Execution Order & Advanced Syntax\n\n### SQL Logical Query Processing Order\nWriting SQL differs from how the database engine executes it:\n$$\\text{FROM} \\longrightarrow \\text{WHERE} \\longrightarrow \\text{GROUP BY} \\longrightarrow \\text{HAVING} \\longrightarrow \\text{SELECT} \\longrightarrow \\text{DISTINCT} \\longrightarrow \\text{ORDER BY}$$\n\n> [!CAUTION]\n> Column aliases defined in `SELECT` cannot be referenced in `WHERE` or `GROUP BY` because `SELECT` is evaluated after them!\n\n### `WHERE` vs. `HAVING`\n* `WHERE`: Filters individual records **before aggregation**. Cannot use aggregate functions (`WHERE salary > 50000`).\n* `HAVING`: Filters aggregated groups **after aggregation**. Uses aggregate functions (`HAVING COUNT(*) > 5`).\n\n### Subquery Operators:\n* `IN / NOT IN`: Membership test against a list or subquery.\n  *(Watch out for NULLs in `NOT IN`: if subquery returns any NULL, `NOT IN` evaluates to UNKNOWN/false for all rows!)*\n* `EXISTS / NOT EXISTS`: Returns TRUE if the correlated subquery returns at least 1 row. Highly efficient because DB stops scanning on first hit.\n* `ANY / SOME`:\n  * `x > ANY (SELECT ...)`: Greater than the **minimum** of the subquery values.\n* `ALL`:\n  * `x > ALL (SELECT ...)`: Greater than the **maximum** of the subquery values.\n\n---\n\n## 6. Entity-Relationship (ER) Modeling\n\n```\n  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510        \u25c7\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25c7        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n  \u2502   Student   \u251c\u2500\u2500\u2500(M)\u2500\u2500\u2524  Enrolls  \u251c\u2500\u2500\u2500(N)\u2500\u2500\u2524   Course    \u2502\n  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518        \u25c7\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25c7        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n### Components\n* **Entity:** An independently identifiable object in real world.\n* **Weak Entity Set:** An entity set that does not have sufficient attributes to form a primary key.\n  * Represented by **double rectangle**.\n  * Depends on an **identifying entity set** via an **identifying relationship** (represented by **double diamond**).\n  * Has a **discriminator / partial key** (underlined with dashed/dotted line).\n  * Must have **total participation** in the identifying relationship.\n  * Primary key of weak entity = **Primary key of identifying entity + Discriminator**.\n* **Attributes:**\n  * Simple vs. Composite (`Address` broken into `City, State, Zip`).\n  * Single-valued vs. Multi-valued (double oval, e.g. `{PhoneNumbers}`).\n  * Derived (dashed oval, e.g. `Age` derived from `DOB`).\n\n### Cardinality Ratios & Table Reduction Rules\n1. **Many-to-Many ($M:N$):**\n   * Cannot merge tables.\n   * Requires **3 tables**: Entity $E_1$, Entity $E_2$, and Relationship table $R$.\n   * Primary key of relationship table $R$ is the composite key $(PK_{E_1}, PK_{E_2})$.\n2. **One-to-Many ($1:N$):**\n   * Can be represented with **2 tables** by embedding the primary key of the \"1\" side as a foreign key on the \"N\" (Many) side table.\n3. **One-to-One ($1:1$):**\n   * If one side has **total participation**, place foreign key in that side's table to avoid NULLs.\n   * If both sides have total participation, relations can be **merged into a single table**.\n4. **Multi-valued Attributes:**\n   * Each multi-valued attribute requires its **own separate table** with $(PK_{\\text{Entity}}, \\text{AttributeValue})$ as primary key.\n\n---\n\n## 7. Functional Dependencies & Normalization (Bonus Week 5)\n\n* **Functional Dependency ($X \\to Y$):** If two tuples agree on attribute set $X$, they must agree on attribute set $Y$.\n* **Attribute Closure ($X^+$):** Set of all attributes functionally determined by $X$ under given $F$.\n  * If $X^+ = R$, then $X$ is a **Super Key**.\n  * If $X$ is a super key and no proper subset of $X$ is a super key, $X$ is a **Candidate Key**.\n* **Super Key Count Formula:**\n  If relation $R$ has $n$ attributes and a candidate key has $k$ attributes:\n  $$\\text{Number of Super Keys} = 2^{n - k}$$\n* **Lossless Join Decomposition Condition:**\n  Decomposition of $R$ into $R_1$ and $R_2$ is lossless if and only if:\n  $$(R_1 \\cap R_2) \\to R_1 \\quad \\text{OR} \\quad (R_1 \\cap R_2) \\to R_2$$\n  *(i.e. The intersection attributes must form a super key for at least one of the decomposed tables).*\n\n---\n\n# PART 3: TOP 10 EXAM TRAPS & FORMULAS CHEAT SHEET\n\n1. **`grep` vs `find -exec`:**\n   * `find . -name \"*.txt\" -exec grep -l \"pattern\" {} +`: Efficient, spawns single grep.\n   * `find . -name \"*.txt\" | xargs grep \"pattern\"`: Standard alternative.\n2. **`umask` on files vs directories:**\n   * File default maximum is `666`, NEVER `777`. Subtraction cannot result in execution bits on files unless explicitly set by `chmod`.\n3. **Hard link deletion:**\n   * Deleting file does NOT delete data if hard links exist. Deleting file DOES break symbolic links.\n4. **Relational Algebra duplicate elimination:**\n   * $\\pi$ (projection) eliminates duplicates by mathematical definition! In SQL, `SELECT` preserves duplicates unless `DISTINCT` is specified.\n5. **Foreign key NULLs:**\n   * A foreign key CAN be NULL unless explicitly declared with `NOT NULL` constraint.\n6. **Cartesian Product Degrees and Cardinalities:**\n   * Degree adds: $\\text{deg}(R \\times S) = \\text{deg}(R) + \\text{deg}(S)$.\n   * Cardinality multiplies: $|R \\times S| = |R| \\times |S|$.\n7. **`COUNT(*)` vs `COUNT(column)`:**\n   * `COUNT(*)` counts all rows including NULLs.\n   * `COUNT(col)` counts only rows where `col` IS NOT NULL.\n8. **Weak entity primary key:**\n   * Identifying owner's PK + Weak entity discriminator.\n9. **`sort` before `uniq`:**\n   * Always pipe `sort` before `uniq` (`sort | uniq -c`).\n10. **Redirection order:**\n    * `cmd > file 2>&1` directs stdout to `file`, then stderr to same destination as stdout.\n    * `cmd 2>&1 > file` directs stderr to terminal (current stdout), then stdout to `file` (NOT the same!).\n"</script>
-
     <script>
-        // Progress bar
+        // Reading Progress
         window.addEventListener('scroll', () => {
             const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -316,40 +771,6 @@
             el.addEventListener('click', () => {
                 document.getElementById('toc-drawer').style.display = 'none';
             });
-        });
-
-        // Render Markdown with marked.js
-        window.addEventListener('DOMContentLoaded', () => {
-            const raw = JSON.parse(document.getElementById('raw-markdown').textContent);
-            
-            // Custom heading renderer to include slug IDs
-            const renderer = new marked.Renderer();
-            renderer.heading = function({ text, depth }) {
-                const clean = text.replace(/<[^>]+>/g, '').trim();
-                const slug = clean.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-                return `<h${depth} id="${slug}"><a href="#${slug}" style="opacity:0.3; text-decoration:none; color:inherit; margin-right:6px;">#</a>${text}</h${depth}>`;
-            };
-            
-            marked.use({ renderer });
-            document.getElementById('markdown-container').innerHTML = marked.parse(raw);
-
-            // Re-render KaTeX math
-            if (window.renderMathInElement) {
-                renderMathInElement(document.getElementById('markdown-container'), {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false},
-                        {left: '\\(', right: '\\)', display: false},
-                        {left: '\\[', right: '\\]', display: true}
-                    ],
-                    throwOnError: false
-                });
-            }
-
-            // Re-run Prism code highlighting
-            if (window.Prism) {
-                Prism.highlightAll();
-            }
         });
     </script>
 </body>
